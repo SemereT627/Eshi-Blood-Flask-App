@@ -19,27 +19,34 @@
     <!--end::Fonts-->
     <!--begin::Page Custom Styles(used by this page)-->
     <link
-      href="~/css/pages/login/login-3.css"
+      href="{{url_for('static',filename='css/pages/login/login-3.css')}}"
       rel="stylesheet"
       type="text/css"
     />
     <!--end::Page Custom Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
     <link
-      href="~/plugins/global/plugins.bundle.css"
+      href="{{url_for('static',filename='plugins/global/plugins.bundle.css')}}"
       rel="stylesheet"
       type="text/css"
     />
     <link
-      href="~/plugins/custom/prismjs/prismjs.bundle.css"
+      href="{{url_for('static',filename='plugins/custom/prismjs/prismjs.bundle.css')}}"
       rel="stylesheet"
       type="text/css"
     />
-    <link href="~/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link
+      href="{{url_for('static',filename='css/style.bundle.css')}}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!--end::Global Theme Styles-->
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="~/media/logos/favicon.ico" />
+    <link
+      rel="shortcut icon"
+      href="{{url_for('static',filename='media/logos/favicon.ico')}}"
+    />
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -69,7 +76,11 @@
           <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
             <!--begin::Aside header-->
             <a href="#" class="login-logo text-center pt-lg-25 pb-10">
-              <img src="~/media/logos/logo-1.png" class="max-h-70px" alt="" />
+              <img
+                src="{{url_for('static',filename='media/logos/logo-1.png')}}"
+                class="max-h-70px"
+                alt=""
+              />
             </a>
             <!--end::Aside header-->
             <!--begin::Aside Title-->
@@ -108,7 +119,7 @@
             "
             style="
               background-position-y: calc(100% + 5rem);
-              background-image: url(../media/svg/illustrations/blood-donation-login.svg);
+              background-image: url({{url_for('static',filename='media/svg/illustrations/blood-donation-login.svg')}});
             "
           ></div>
           <!--end::Aside Bottom-->
@@ -159,10 +170,7 @@
                   </h3>
                   <div class="text-muted font-weight-bold font-size-h4">
                     New Here?
-                    <a
-                      asp-controller="Auth"
-                      asp-action="Register"
-                      class="text-primary font-weight-bolder"
+                    <a href="{{url_for('register')}}" class="text-primary font-weight-bolder"
                       >Create Account</a
                     >
                   </div>
@@ -338,12 +346,12 @@
     </script>
     <!--end::Global Config-->
     <!--begin::Global Theme Bundle(used by all pages)-->
-    <script src="~/plugins/global/plugins.bundle.js"></script>
-    <script src="~/plugins/custom/prismjs/prismjs.bundle.js"></script>
-    <script src="~/js/scripts.bundle.js"></script>
+    <script src="{{url_for('static',filename='plugins/global/plugins.bundle.js')}}"></script>
+    <script src="{{url_for('static',filename='plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
+    <script src="{{url_for('static',filename='js/scripts.bundle.js')}}"></script>
     <!--end::Global Theme Bundle-->
     <!--begin::Page Scripts(used by this page)-->
-    <script src="~/js/pages/custom/login/login-3.js"></script>
+    <script src="{{url_for('static',filename='js/pages/custom/login/login-3.js')}}"></script>
     <!--end::Page Scripts-->
   </body>
   <!--end::Body-->
