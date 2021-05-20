@@ -2,9 +2,10 @@
 import enum
 
 
-class Status(enum.Enum):
+class Gender(enum.Enum):
     Male="Male"
     Female = "Female"
+
 
 class MartialStatus(enum.Enum):
     Single = "Single"
@@ -19,7 +20,7 @@ class WeekDay(enum.Enum):
     Monday="Monday"
     Tuesday="Tuesday"
     Wednesday="Wednesday"
-    Thursday,="Thursday"
+    Thursday="Thursday"
     Friday="Friday"
     Saturday = "Saturday"
     Sunday = "Sunday"

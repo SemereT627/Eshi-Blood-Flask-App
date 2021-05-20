@@ -1,0 +1,1 @@
+this folder contains web files shared across multiple pages
