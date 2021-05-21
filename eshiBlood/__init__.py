@@ -1,20 +1,17 @@
 import os
-from flask import Flask, render_template
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+from flask_migrate import Migrate
+load_dotenv()
+
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 
-@app.route('/register')
-def register():
-    return render_template("auth/register.html")
 
-@app.route('/login')
-def login():
-    return render_template("auth/login.html")
+db = SQLAlchemy(app)
+migrate = Migrate(app,db)
 
-@app.route('/admin/index')
-def admin():
-    return render_template("admin/index.html")
-
-@app.route('/user/index')
-def user():
-    return render_template("user/index.html")
+from eshiBlood.models import models
+from eshiBlood.routes import routes
