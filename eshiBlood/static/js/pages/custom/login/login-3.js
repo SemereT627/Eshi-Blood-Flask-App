@@ -186,34 +186,39 @@ var KTLogin = function() {
 			form,
 			{
 				fields: {
-					fname: {
+					firstName: {
 						validators: {
 							notEmpty: {
 								message: 'First name is required'
-							}
+							},
+							
 						}
 					},
-					lname: {
+					lastName: {
 						validators: {
 							notEmpty: {
 								message: 'Last Name is required'
 							}
 						}
 					},
-					phone: {
+					phoneNumber: {
 						validators: {
 							notEmpty: {
-								message: 'Phone is required'
+								message: 'Phone number is required'
 							}
 						}
 					},
-					email: {
-						validators: {
-							notEmpty: {
-								message: 'Email is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
+					emergencyContactName:{
+						validators:{
+							notEmpty:{
+								message: 'Emergency contact name is required'
+							}
+						}
+					},
+					emergencyContactPhoneNumber:{
+						validators:{
+							notEmpty:{
+								message: 'Emergency contact phone number is required'
 							}
 						}
 					}
@@ -234,14 +239,14 @@ var KTLogin = function() {
 			form,
 			{
 				fields: {
-					address1: {
+					addressLine: {
 						validators: {
 							notEmpty: {
 								message: 'Address is required'
 							}
 						}
 					},
-					postcode: {
+					postCode: {
 						validators: {
 							notEmpty: {
 								message: 'Postcode is required'
@@ -286,24 +291,27 @@ var KTLogin = function() {
 			form,
 			{
 				fields: {
-					delivery: {
+					email: {
 						validators: {
 							notEmpty: {
-								message: 'Delivery type is required'
+								message: 'Email is required'
+							},
+							emailAddress: {
+								message: 'The value is not a valid email address'
 							}
 						}
 					},
-					packaging: {
-						validators: {
-							notEmpty: {
-								message: 'Packaging type is required'
+					password:{
+						validators:{
+							notEmpty:{
+								message: 'Password is required'
 							}
 						}
 					},
-					preferreddelivery: {
-						validators: {
-							notEmpty: {
-								message: 'Preferred delivery window is required'
+					confirmPassword:{
+						validators:{
+							notEmpty:{
+								message: 'Please repeat your password'
 							}
 						}
 					}

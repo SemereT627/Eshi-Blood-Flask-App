@@ -4,7 +4,7 @@
   <head>
     <base />
     <meta charset="utf-8" />
-    <title>Sign Up | Keenthemes</title>
+    <title>Eshi Blood | Sign up</title>
     <meta name="description" content="Singin page example" />
     <meta
       name="viewport"
@@ -192,6 +192,8 @@
             <div class="login-form login-form-signup">
               <!--begin::Form-->
               <form
+                method="POST"
+                action="{{url_for('login')}}"
                 class="form"
                 novalidate="novalidate"
                 id="kt_login_signup_form"
@@ -219,134 +221,38 @@
                   <!--begin::Title-->
                   <!--begin::Form Group-->
                   <div class="form-group">
-                    <label class="font-size-h6 font-weight-bolder text-dark"
-                      >First Name</label
-                    >
-                    <input
-                      type="text"
-                      class="
-                        form-control
-                        h-auto
-                        py-7
-                        px-6
-                        border-0
-                        rounded-lg
-                        font-size-h6
-                      "
-                      name="fname"
-                      placeholder="First Name"
-                      value=""
-                    />
+                    {{form.firstName.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.firstName(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="First Name")}}
                   </div>
                   <!--end::Form Group-->
                   <!--begin::Form Group-->
                   <div class="form-group">
-                    <label class="font-size-h6 font-weight-bolder text-dark"
-                      >Last Name</label
-                    >
-                    <input
-                      type="text"
-                      class="
-                        form-control
-                        h-auto
-                        py-7
-                        px-6
-                        border-0
-                        rounded-lg
-                        font-size-h6
-                      "
-                      name="lname"
-                      placeholder="Last Name"
-                      value=""
-                    />
+                    {{form.lastName.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.lastName(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Last Name")}}
                   </div>
                   <!--end::Form Group-->
                   <!--begin::Form Group-->
                   <div class="form-group">
-                    <label class="font-size-h6 font-weight-bolder text-dark"
-                      >User Name</label
-                    >
-                    <input
-                      type="text"
-                      class="
-                        form-control
-                        h-auto
-                        py-7
-                        px-6
-                        border-0
-                        rounded-lg
-                        font-size-h6
-                      "
-                      name="uname"
-                      placeholder="User Name"
-                      value=""
-                    />
+                    {{form.userName.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.userName(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="User Name")}}
                   </div>
                   <!--end::Form Group-->
                   <!--begin::Form Group-->
                   <div class="form-group">
-                    <label class="font-size-h6 font-weight-bolder text-dark"
-                      >Your Phone</label
-                    >
-                    <input
-                      type="tel"
-                      class="
-                        form-control
-                        h-auto
-                        py-7
-                        px-6
-                        border-0
-                        rounded-lg
-                        font-size-h6
-                      "
-                      name="phone"
-                      placeholder="phone"
-                      value="+61412345678"
-                    />
+                    {{form.phoneNumber.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.phoneNumber(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Phone Number")}}
                   </div>
                   <!--end::Form Group-->
                   <!--begin::Form Group-->
                   <div class="form-group">
-                    <label class="font-size-h6 font-weight-bolder text-dark"
-                      >Emergency Contact Name</label
-                    >
-                    <input
-                      type="text"
-                      class="
-                        form-control
-                        h-auto
-                        py-7
-                        px-6
-                        border-0
-                        rounded-lg
-                        font-size-h6
-                      "
-                      name="emergency_name"
-                      placeholder="Emergency Contact Name"
-                      value=""
-                    />
+                    {{form.emergencyContactName.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.emergencyContactName(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Emergency Contact Name")}}
                   </div>
                   <!--end::Form Group-->
                   <!--begin::Form Group-->
                   <div class="form-group">
-                    <label class="font-size-h6 font-weight-bolder text-dark"
-                      >Emergency Contact Phone</label
-                    >
-                    <input
-                      type="tel"
-                      class="
-                        form-control
-                        h-auto
-                        py-7
-                        px-6
-                        border-0
-                        rounded-lg
-                        font-size-h6
-                      "
-                      name="emergency_phone"
-                      placeholder="Emergency Contact Phone"
-                      value="+61412345678"
-                    />
+                    {{form.emergencyContactPhoneNumber.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.emergencyContactPhoneNumber(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Emergency Contact Phone Number")}}
                   </div>
 
                   <!--end::Form Group-->
@@ -371,25 +277,10 @@
                   <div class="row">
                     <div class="col-xl-6">
                       <!--begin::Input-->
+                      
                       <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark"
-                          >Address Line
-                        </label>
-                        <input
-                          type="text"
-                          class="
-                            form-control
-                            h-auto
-                            py-7
-                            px-6
-                            border-0
-                            rounded-lg
-                            font-size-h6
-                          "
-                          name="address"
-                          placeholder="Address Line 1"
-                          value="Address Line"
-                        />
+                        {{form.addressLine.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                        {{form.addressLine(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Address Line")}}
                       </div>
                       <!--end::Input-->
                     </div>
@@ -400,48 +291,16 @@
                     <div class="col-xl-6">
                       <!--begin::Input-->
                       <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark"
-                          >Postcode</label
-                        >
-                        <input
-                          type="text"
-                          class="
-                            form-control
-                            h-auto
-                            py-7
-                            px-6
-                            border-0
-                            rounded-lg
-                            font-size-h6
-                          "
-                          name="postcode"
-                          placeholder="Postcode"
-                          value="3000"
-                        />
+                        {{form.postCode.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                        {{form.postCode(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Postcode")}}
                       </div>
                       <!--end::Input-->
                     </div>
                     <div class="col-xl-6">
                       <!--begin::Input-->
                       <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark"
-                          >City</label
-                        >
-                        <input
-                          type="text"
-                          class="
-                            form-control
-                            h-auto
-                            py-7
-                            px-6
-                            border-0
-                            rounded-lg
-                            font-size-h6
-                          "
-                          name="city"
-                          placeholder="City"
-                          value="Melbourne"
-                        />
+                        {{form.city.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                        {{form.city(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="City")}}
                       </div>
                       <!--end::Input-->
                     </div>
@@ -452,24 +311,8 @@
                     <div class="col-xl-6">
                       <!--begin::Input-->
                       <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark"
-                          >Zone</label
-                        >
-                        <input
-                          type="text"
-                          class="
-                            form-control
-                            h-auto
-                            py-7
-                            px-6
-                            border-0
-                            rounded-lg
-                            font-size-h6
-                          "
-                          name="zone"
-                          placeholder="State"
-                          value="VIC"
-                        />
+                        {{form.zone.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                        {{form.zone(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Zone")}}
                         <span class="form-text text-muted"
                           >Please enter your Zone.</span
                         >
@@ -581,7 +424,7 @@
                   <!--    TODO Fix Date picker          -->
                   <div class="form-group">
                     <label class="font-size-h6 font-weight-bolder text-dark"
-                      >Date of Birthday</label
+                      >Date of Birth</label
                     >
 
                     <input
@@ -610,16 +453,35 @@
                     }, 1000);
                   </script>
 
+                  <div class="py-4">
                   <!--end: Wizard Step 3-->
                   <!--begin: Wizard Step 4-->
+                  <h3
+                  class="
+                    font-weight-bolder
+                    text-dark
+                    font-size-h2 font-size-h1-lg
+                  "
+                  >
+                  User credential
+                  </h3>
+                  <div class="text-muted font-weight-bold font-size-h4">
+                    Credentials help for login.
+                  </div>
+                </div>
+                  <div class="form-group">
+                    {{form.email.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.email(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Your email")}}
+                  </div>
+                  <div class="form-group">
+                    {{form.password.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.password(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Your password")}}
+                  </div>
+                  <div class="form-group">
+                    {{form.confirmPassword.label(class="font-size-h6 font-weight-bolder text-dark")}}
+                    {{form.confirmPassword(class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6",placeholder="Confirm password")}}
+                  </div>
 
-                  <label class="radio">
-                    <input type="radio" name="terms" />
-                    <span></span>
-                    I agree to the terms and conditions++
-                  </label>
-                  <!--end: Wizard Step 3-->
-                  <!--begin: Wizard Step 4-->
                 </div>
                 <!--end: Wizard Step 3-->
                 <!--begin: Wizard Step 4-->
@@ -645,11 +507,11 @@
                   <div
                     class="text-dark-50 font-weight-bold line-height-lg mb-8"
                   >
-                    <div id="uname">User Name:&nbsp;&nbsp;</div>
-                    <div id="fullname">Full Name:&nbsp;&nbsp;</div>
-                    <div id="phone">Phone(+251):&nbsp;&nbsp;</div>
+                    <div class="d-flex">User Name:&nbsp;&nbsp;<div id="uname"></div></div>
+                    <div class="d-flex">Full Name:&nbsp;&nbsp;<div id="fullname"></div></div>
+                    <div class="d-flex">Phone(+251):&nbsp;&nbsp;<div id="phone"></div></div>
 
-                    <div id="econtact">Emergency Contact:&nbsp;&nbsp;</div>
+                    <div class="d-flex">Emergency Contact:&nbsp;&nbsp;<div id="econtact"></div></div>
                   </div>
                   <!--end::Section-->
                   <!--begin::Section-->
@@ -659,11 +521,11 @@
                   <div
                     class="text-dark-50 font-weight-bold line-height-lg mb-8"
                   >
-                    <div id="address">Address:&nbsp;&nbsp;</div>
-                    <div id="postcode">Post code:&nbsp;&nbsp;</div>
-                    <div id="city">City:&nbsp;&nbsp;</div>
-                    <div id="zone">Zone:&nbsp;&nbsp;</div>
-                    <div id="state">State:&nbsp;&nbsp;</div>
+                  <div class="d-flex">Address:&nbsp;&nbsp;<div id="address"></div></div>
+                  <div class="d-flex">Post code:&nbsp;&nbsp;<div id="postcode"></div></div>
+                  <div class="d-flex">City:&nbsp;&nbsp;<div id="city"></div></div>
+                  <div class="d-flex">Zone:&nbsp;&nbsp;<div id="zone"></div></div>
+                  <div class="d-flex">State:&nbsp;&nbsp;<div id="state"></div></div>
                   </div>
                   <!--end::Section-->
                   <!--begin::Section-->
@@ -671,22 +533,21 @@
                   <div
                     class="text-dark-50 font-weight-bold line-height-lg mb-8"
                   >
-                    <div id="gender">Gender:&nbsp;&nbsp;</div>
-                    <div id="blood_type">Blood Type:&nbsp;&nbsp;</div>
-                    <div id="dob">Date of Birth:&nbsp;&nbsp;</div>
+                  <div class="d-flex">Gender:&nbsp;&nbsp;<div id="gender"></div></div>
+                  <div class="d-flex">Blood Type:&nbsp;&nbsp;<div id="blood_type"></div></div>
+                  <div class="d-flex">Date of Birth:&nbsp;&nbsp;<div id="dob"></div></div>  
                   </div>
 
                   <script>
-                    let uname = document.getElementsByName("uname")[0];
-                    let fname = document.getElementsByName("fname")[0];
-                    let lname = document.getElementsByName("lname")[0];
-                    let phone = document.getElementsByName("phone")[0];
+                    let uname = document.getElementsByName("userName")[0];
+                    let fname = document.getElementsByName("firstName")[0];
+                    let lname = document.getElementsByName("lastName")[0];
+                    let phone = document.getElementsByName("phoneNumber")[0];
                     //let email = document.getElementsByName("email")[0];
-                    let ename = document.getElementsByName("emergency_name")[0];
-                    let ephone =
-                      document.getElementsByName("emergency_phone")[0];
-                    let address = document.getElementsByName("address")[0];
-                    let postcode = document.getElementsByName("postcode")[0];
+                    let ename = document.getElementsByName("emergencyContactName")[0];
+                    let ephone = document.getElementsByName("emergencyContactPhoneNumber")[0];
+                    let address = document.getElementsByName("addressLine")[0];
+                    let postcode = document.getElementsByName("postCode")[0];
                     let city = document.getElementsByName("city")[0];
                     let zone = document.getElementsByName("zone")[0];
                     let state = document.getElementsByName("state")[0];
@@ -703,6 +564,7 @@
                     let enameId = document.getElementById("emergency_name");
                     let ephoneId = document.getElementById("emergency_phone");
                     let addressId = document.getElementById("address");
+                    let econtactId = document.getElementById("econtact");
                     let postcodeId = document.getElementById("postcode");
                     let cityId = document.getElementById("city");
                     let zoneId = document.getElementById("zone");
@@ -716,18 +578,19 @@
                       let next_step_btn = document.getElementById("next_step");
 
                       next_step_btn.addEventListener("click", () => {
-                        unameId.innerText += uname.value;
-                        fullname.innerText += fname.value + "  " + lname.value;
-                        phoneId.innerText += phone.value;
+                        unameId.innerText = uname.value;
+                        fullname.innerText = fname.value + "  " + lname.value;
+                        phoneId.innerText = phone.value;
                         //emailId.innerText += email.value;
-                        addressId.innerText += address.value;
-                        postcodeId.innerText += postcode.value;
-                        cityId.innerText += city.value;
-                        zoneId.innerText += zone.value;
-                        stateId.innerText += state.value;
-                        genderId.innerText += gender.value;
-                        bloodtypeId.innerText += bloodtype.value;
-                        dobId.innerText += dob.value;
+                        addressId.innerText = address.value;
+                        econtactId.innerText = ephone.value;
+                        postcodeId.innerText = postcode.value;
+                        cityId.innerText = city.value;
+                        zoneId.innerText = zone.value;
+                        stateId.innerText = state.value;
+                        genderId.innerText = gender.value;
+                        bloodtypeId.innerText = bloodtype.value;
+                        dobId.innerText = dob.value;
                         console.log("clicked");
                       });
                     }, 1000);

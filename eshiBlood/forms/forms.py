@@ -17,18 +17,18 @@ class SignUpForm(FlaskForm):
         min=4, max=10, message="Username too long")])
 
     firstName = StringField("First Name", validators=[
-                            DataRequired(), Length(min=3, message="First name is too short")])
+                            DataRequired(), Length(min=4, message="First name is too short")])
 
-    lastName = StringField("First Name", validators=[
-                           DataRequired(), Length(min=3, message="Last name is too short")])
+    lastName = StringField("Last Name", validators=[
+                           DataRequired(), Length(min=4, message="Last name is too short")])
 
-    phone = StringField(
-        "Your Phone +251-", validators=[DataRequired(), Length(min=9, message="too short")])
+    phoneNumber = StringField(
+        "Your phone number", validators=[DataRequired(), Length(min=9, message="too short")])
 
     emergencyContactName = StringField("Emergency Contact Name", validators=[
                                        DataRequired(), Length(min=3, message="Name is too short")])
 
-    emergencyContactPhone = StringField("Emergency Contact Phone +251-", validators=[
+    emergencyContactPhoneNumber = StringField("Emergency Contact Phone Number", validators=[
                                         DataRequired(), Length(min=9, max=10, message="too short")])
 
     addressLine = StringField("Address Line", validators=[DataRequired()])
@@ -41,14 +41,14 @@ class SignUpForm(FlaskForm):
 
     city = StringField("City", validators=[DataRequired()])
 
-    gender = SelectField("Gender", choices=[Gender.Male, Gender.Female])
+    gender = SelectField("Gender", choices=[(1,Gender.Male), (2,Gender.Female)])
 
     bloodType = SelectField("Blood Type", choices=["O", "A", "AB", "B"])
 
-    dob = StringField("Date of birthday", validators=[DataRequired()])
+    dateOfBirth = StringField("Date of birthday", validators=[DataRequired()])
 
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    confirm = PasswordField('Repeat Password', validators=[
+    confirmPassword = PasswordField('Repeat Password', validators=[
                             DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign up')
