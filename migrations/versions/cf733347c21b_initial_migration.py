@@ -1,8 +1,8 @@
 """Initial Migration
 
-Revision ID: 072b6452eda6
+Revision ID: cf733347c21b
 Revises: 
-Create Date: 2021-05-21 15:25:10.682803
+Create Date: 2021-05-25 18:39:26.063424
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '072b6452eda6'
+revision = 'cf733347c21b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,11 +41,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('BloodTypeId')
     )
     op.create_table('UserCredential',
-    sa.Column('UserId', sa.Integer(), nullable=False),
-    sa.Column('FirstName', sa.String(), nullable=True),
+    sa.Column('UserCredentialId', sa.Integer(), nullable=False),
+    sa.Column('Email', sa.String(), nullable=True),
     sa.Column('PhoneNumber', sa.String(), nullable=True),
     sa.Column('Password', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('UserId')
+    sa.PrimaryKeyConstraint('UserCredentialId')
     )
     op.create_table('EmergencyContact',
     sa.Column('EmergencyContactId', sa.Integer(), nullable=False),
@@ -67,7 +67,7 @@ def upgrade():
     )
     op.create_table('User',
     sa.Column('UserId', sa.Integer(), nullable=False),
-    sa.Column('FirstName', sa.String(), nullable=True),
+    sa.Column('FirstName', sa.String(), nullable=False),
     sa.Column('LastName', sa.String(), nullable=True),
     sa.Column('UserName', sa.String(), nullable=True),
     sa.Column('BirthDate', sa.Date(), nullable=True),
@@ -75,7 +75,7 @@ def upgrade():
     sa.Column('CreatedAt', sa.Date(), nullable=True),
     sa.Column('UpdatedAt', sa.Date(), nullable=True),
     sa.Column('Gender', sa.Enum('Male', 'Female', name='gender'), nullable=True),
-    sa.Column('Check', sa.String(), nullable=True),
+    sa.Column('check', sa.String(), nullable=True),
     sa.Column('MartialStatus', sa.Enum('Single', 'Married', name='martialstatus'), nullable=True),
     sa.Column('BloodType', sa.Integer(), nullable=True),
     sa.Column('Address', sa.Integer(), nullable=True),
@@ -85,11 +85,11 @@ def upgrade():
     )
     op.create_table('DonationCenter',
     sa.Column('DonationCenterId', sa.Integer(), nullable=False),
-    sa.Column('AddressId', sa.Integer(), nullable=True),
+    sa.Column('Address', sa.Integer(), nullable=True),
     sa.Column('DonationCenterName', sa.String(), nullable=True),
     sa.Column('Status', sa.Enum('Active', 'Pending', 'Closed', name='status'), nullable=True),
     sa.Column('UpdatedBy', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['AddressId'], ['Address.AddressId'], ),
+    sa.ForeignKeyConstraint(['Address'], ['Address.AddressId'], ),
     sa.ForeignKeyConstraint(['UpdatedBy'], ['User.UserId'], ),
     sa.PrimaryKeyConstraint('DonationCenterId')
     )
@@ -103,7 +103,7 @@ def upgrade():
     )
     op.create_table('UserRole',
     sa.Column('UserRoleId', sa.Integer(), nullable=False),
-    sa.Column('UserRoleName', sa.Integer(), nullable=True),
+    sa.Column('RoleName', sa.Integer(), nullable=True),
     sa.Column('User', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['User'], ['User.UserId'], ),
     sa.PrimaryKeyConstraint('UserRoleId')

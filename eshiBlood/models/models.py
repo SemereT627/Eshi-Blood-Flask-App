@@ -7,29 +7,27 @@ class User(db.Model):
     __tablename__ = "User"
 
     UserId = db.Column(db.Integer, primary_key=True)
-    FirstName = db.Column(db.String, nullable=False)
-    LastName = db.Column(db.String)
-    UserName = db.Column(db.String)
+    FirstName = db.Column(db.String(20), nullable=False)
+    LastName = db.Column(db.String(20))
+    UserName = db.Column(db.String(20))
     BirthDate = db.Column(db.Date)
     RegisteredAt = db.Column(db.Date)
     CreatedAt = db.Column(db.Date)
     UpdatedAt = db.Column(db.Date)
-    Gender = db.Column(Enum(Gender))
-    check = db.Column(db.String)
-
-    MartialStatus = db.Column(Enum(MartialStatus))
+    Gender = db.Column(db.String)
+    check = db.Column(db.String(20))
+    MartialStatus = db.Column(db.String(20))
     BloodType = db.Column(db.Integer, db.ForeignKey("BloodType.BloodTypeId"))
     Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
     # Appointments = db.Column("Appointments",db.Integer, db.ForeignKey("Appointment.AppointmentId"))
-
 
 # usercredential
 class UserCredential(db.Model):
     __tablename__ = "UserCredential"
     UserCredentialId = db.Column(db.Integer, primary_key=True)
-    Email = db.Column(db.String)
-    PhoneNumber = db.Column(db.String)
-    Password = db.Column(db.String)
+    Email = db.Column(db.String(20),nullable=False)
+    Password = db.Column(db.String(20),nullable=False)
+
 
 # userrole
 
@@ -50,7 +48,7 @@ class Appointment(db.Model):
     StartTime = db.Column(db.Date)
     EndTime = db.Column(db.Date)
     Status = db.Column(Enum(Status))
-    AppointmentDescription = db.Column(db.String)
+    AppointmentDescription = db.Column(db.String(20))
     DonationCenter = db.Column(db.Integer, db.ForeignKey(
         'DonationCenter.DonationCenterId'))
 
@@ -63,8 +61,8 @@ class Appointment(db.Model):
 class Event(db.Model):
     __tablename__ = "Event"
     EventId = db.Column(db.Integer, primary_key=True)
-    EventName = db.Column(db.String)
-    EventGoal = db.Column(db.String)
+    EventName = db.Column(db.String(20))
+    EventGoal = db.Column(db.String(20))
     EventOrganizer = db.Column(db.Integer, db.ForeignKey("User.UserId"))
 
 
@@ -74,7 +72,7 @@ class Request(db.Model):
 
     RequestId = db.Column(db.Integer, primary_key=True)
     UnitsNeeded = db.Column(db.Integer)
-    RequestReason = db.Column(db.String)
+    RequestReason = db.Column(db.String(20))
     Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
     BloodType = db.Column(db.Integer, db.ForeignKey("BloodType.BloodTypeId"))
 
@@ -84,16 +82,16 @@ class Request(db.Model):
 class Address(db.Model):
     __tablename__ = "Address"
     AddressId = db.Column(db.Integer, primary_key=True)
-    State = db.Column(db.String)
-    City = db.Column(db.String)
-    SubCity = db.Column(db.String)
-    Woreda = db.Column(db.String)
-    Kebele = db.Column(db.String)
-    Zone = db.Column(db.String)
-    AddressLine = db.Column(db.String)
-    PostCode = db.Column(db.String)
-    PhoneNumber = db.Column(db.String)
-    Email = db.Column(db.String)
+    State = db.Column(db.String(20))
+    City = db.Column(db.String(20))
+    SubCity = db.Column(db.String(20))
+    Woreda = db.Column(db.String(20))
+    Kebele = db.Column(db.String(20))
+    Zone = db.Column(db.String(20))
+    AddressLine = db.Column(db.String(20))
+    PostCode = db.Column(db.String(20))
+    PhoneNumber = db.Column(db.String(20))
+    Email = db.Column(db.String(20))
 
 
 # donationcenter
@@ -104,7 +102,7 @@ class DonationCenter(db.Model):
 
     DonationCenterId = db.Column(db.Integer, primary_key=True)
     Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
-    DonationCenterName = db.Column(db.String)
+    DonationCenterName = db.Column(db.String(20))
     Status = db.Column(Enum(Status))
     UpdatedBy = db.Column(db.Integer, db.ForeignKey("User.UserId"))
 
@@ -124,17 +122,17 @@ class TimeSlot(db.Model):
 class BloodType(db.Model):
     __tablename__ = "BloodType"
     BloodTypeId = db.Column(db.Integer, primary_key=True)
-    BloodTypeName = db.Column(db.String)
-    BloodTypeDescription = db.Column(db.String)
-    BloodTypeCreatedAt = db.Column(db.String)
-    BloodTypeUpdatedAt = db.Column(db.String)
+    BloodTypeName = db.Column(db.String(20))
+    BloodTypeDescription = db.Column(db.String(20))
+    BloodTypeCreatedAt = db.Column(db.String(20))
+    BloodTypeUpdatedAt = db.Column(db.String(20))
 
 
 # emergencycontact
 class EmergencyContact(db.Model):
     __tablename__ = "EmergencyContact"
     EmergencyContactId = db.Column(db.Integer, primary_key=True)
-    ContactName = db.Column(db.String)
-    ContactPhone = db.Column(db.String)
+    ContactName = db.Column(db.String(20))
+    ContactPhone = db.Column(db.String(20))
     BloodType = db.Column(db.Integer, db.ForeignKey("BloodType.BloodTypeId"))
 # user

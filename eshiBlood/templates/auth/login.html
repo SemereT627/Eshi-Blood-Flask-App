@@ -127,6 +127,15 @@
         <!--begin::Aside-->
         <!--begin::Content-->
         <div class="login-content flex-row-fluid d-flex flex-column p-10">
+          {% with messages=get_flashed_messages(with_categories=true)%}
+            {% if messages%}
+                {% for category,message in messages%}
+                    <div class="alert alert-{{category}}">
+                        {{message}}
+                    </div>
+                {%endfor%}
+            {%endif%}
+          {%endwith%}
           <!--begin::Top-->
           <div class="text-right d-flex justify-content-center">
             <div
