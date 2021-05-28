@@ -33,6 +33,7 @@ class AppointmentSchema(ma.Schema):
 
 
 class EventSchema(ma.Schema):
+    Status = EnumField(Status, by_value=True)
     class Meta:
         fields = ("EventName", "EventGoal", "EventOrganizer",
                   "TotalDonations", "Status", "CreatedAt", "UpdatedAt", "UpdatedBy")
@@ -40,6 +41,7 @@ class EventSchema(ma.Schema):
 
 
 class RequestSchema(ma.Schema):
+    Status = EnumField(Status, by_value=True)
     class Meta:
         fields = ("RequestReason", "UnitsNeeded", "BloodType",
                   "TotalDonation", "Status", "CreatedAt", "UpdatedAt", "UpdatedBy")
@@ -54,6 +56,7 @@ class AddressSchema(ma.Schema):
 
 
 class DonationCenterSchema(ma.Schema):
+    Status = EnumField(Status, by_value=True)
     class Meta:
         fields = ("Address", "DonationCenterName", "Status", "UpdatedBy")
         model = DonationCenter
@@ -119,8 +122,7 @@ event = api.model("Event", {
 requestSchema = RequestSchema(many=True)
 request = api.model("Request", {
     "RequestReason": fields.String,
-    "UnitsNeeded": fields.String,
-    "BloodType": fields.Integer,
+    "UnitsNeeded": fields.Integer,
     "TotalDonation": fields.Integer,
     "Status": fields.String(description="The object type", enum=["Active", "Pending", "Closed"]),
     "CreatedAt": fields.DateTime,

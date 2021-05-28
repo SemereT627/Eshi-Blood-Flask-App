@@ -10,6 +10,7 @@ appointment_ns = Namespace('appointments')
 
 @appointment_ns.route('/<int:id>')
 class AppointmentResource(Resource):
+    @appointment_ns.expect(appointment)
     def get(self, id):
         '''
         Show single appointment
@@ -24,8 +25,18 @@ class AppointmentResource(Resource):
         Updates an appointment
         '''
         result = Appointment.query.filter_by(AppointmentId=id).first()
+        payload = api.payload
 
-        return appointmentSchema.dump(result)
+        result.StartDate = payload["StartDate"]
+        result.EndDate = payload["EndDate"]
+        result.StartTime = payload["StartTime"]
+        result.EndTime = payload["EndTime"]
+        result.Status = payload["Status"]
+        result.AppointmentDescription = payload["AppointmentDescription"]
+        result.UpdatedAt = datetime.utcnow()
+        db.session.commit()
+
+        return appointmentSchema.dump([result]), 204    
 
 
 @appointment_ns.route('')

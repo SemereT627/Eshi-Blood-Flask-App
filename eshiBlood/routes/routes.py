@@ -9,7 +9,10 @@ api = Api(app,version='1.0',title='Eshi Blood API')
 
 from eshiBlood.resources.auth.auth import auth_ns
 from eshiBlood.resources.appointments.appointments import appointment_ns
+from eshiBlood.resources.events.events import event_ns
+from eshiBlood.resources.requests.requests import request_ns
 
 api.add_namespace(auth_ns)
 api.add_namespace(appointment_ns)
-
+api.add_namespace(event_ns)
+api.add_namespace(request_ns)
