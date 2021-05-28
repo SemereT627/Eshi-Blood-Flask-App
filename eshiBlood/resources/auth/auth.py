@@ -1,12 +1,16 @@
-from flask_restplus import Resource
+from flask_restplus import Resource, Namespace
 from eshiBlood.models.models import UserCredential, User
-from eshiBlood import bcrypt, db, api
+from eshiBlood import bcrypt, db
+from eshiBlood.routes.routes import api
 from eshiBlood.schema.ma import userCredential, user, userSchema
 from datetime import datetime
 from flask_jwt import jwt_required
 
+auth_ns = Namespace('auth')
+
+@auth_ns.route('/login')
 class UserLoginResource(Resource):
-    @api.expect(userCredential)
+    @auth_ns.expect(userCredential)
     def post(self):
         data = api.payload
         
@@ -26,9 +30,9 @@ class UserLoginResource(Resource):
     def get(self):
         return {"Message":"You are Logged In"}
 
-
+@auth_ns.route('/register')
 class UserRegisterResource(Resource):
-    @api.expect(user)
+    @auth_ns.expect(user)
     def post(self):
         payload = api.payload
         newRegisteredUser = payload
@@ -37,12 +41,13 @@ class UserRegisterResource(Resource):
             LastName=newRegisteredUser["LastName"], 
             UserName=newRegisteredUser["UserName"], 
             BirthDate=newRegisteredUser["BirthDate"],
-            RegisteredAt=datetime.utcnow(),
+            # is deleted
             CreatedAt=datetime.utcnow(),
             UpdatedAt=datetime.utcnow(),
             Gender=newRegisteredUser["Gender"],
             MartialStatus=newRegisteredUser["MaritalStatus"], 
             )
+        
         newCredentialUser = payload
         newCredential = UserCredential(
             Email=newCredentialUser["Email"],

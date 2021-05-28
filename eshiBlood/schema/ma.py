@@ -4,7 +4,7 @@ from flask_sqlalchemy import model
 from eshiBlood.models.models import UserCredential, User
 from flask_marshmallow import Marshmallow
 from eshiBlood.models.models import *
-from eshiBlood import api
+from eshiBlood.routes.routes import api
 from marshmallow_enum import EnumField
 
 ma = Marshmallow()
@@ -13,7 +13,7 @@ ma = Marshmallow()
 class UserSchema(ma.Schema):
     class Meta:
         fields = ("FirstName", "LastName", "UserName", "BirthDate",
-                  "Gender", "MartialStatus", "BloodType", "Address")
+                  "Gender", "MartialStatus")
         model = User
 
 
