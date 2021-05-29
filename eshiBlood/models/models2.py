@@ -7,7 +7,7 @@ from eshiBlood.models.enums import *
 
 
 class User(db.Model):
-    __tablename__ = "User"
+    __tablename__ = "User"+
 
     UserId = db.Column(db.Integer, primary_key=True)
     FirstName = db.Column(db.String, nullable=False)
@@ -36,7 +36,7 @@ class Address(db.Model):
     AddressId = db.Column(db.Integer, primary_key=True)
     State = db.Column(db.String)
     City = db.Column(db.String)
-    SubCity = db.Column(db.String)
+    # SubCity = db.Column(db.String)
     Woreda = db.Column(db.String)
     Kebele = db.Column(db.String)
     Zone = db.Column(db.String)

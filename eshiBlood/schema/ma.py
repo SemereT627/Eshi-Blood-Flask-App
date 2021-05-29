@@ -11,6 +11,8 @@ ma = Marshmallow()
 
 
 class UserSchema(ma.Schema):
+    MartialStatus = EnumField(MartialStatus, by_value=True)
+    Gender = EnumField(Gender, by_value=True)
     class Meta:
         fields = ("FirstName", "LastName", "UserName", "BirthDate",
                   "Gender", "MartialStatus")
@@ -27,23 +29,25 @@ class AppointmentSchema(ma.Schema):
     Status = EnumField(Status, by_value=True)
 
     class Meta:
-        fields = ("StartDate", "EndDate", "StartTime", "EndTime",
+        fields = ("AppointmentId", "StartDate", "EndDate", "StartTime", "EndTime",
                   "Status", "AppointmentDescription", "DonationCenter")
         model = Appointment
 
 
 class EventSchema(ma.Schema):
     Status = EnumField(Status, by_value=True)
+
     class Meta:
-        fields = ("EventName", "EventGoal", "EventOrganizer",
+        fields = ("EventId","EventName", "EventGoal", "EventOrganizer",
                   "TotalDonations", "Status", "CreatedAt", "UpdatedAt", "UpdatedBy")
         model = Event
 
 
 class RequestSchema(ma.Schema):
     Status = EnumField(Status, by_value=True)
+
     class Meta:
-        fields = ("RequestReason", "UnitsNeeded", "BloodType",
+        fields = ("RequestId","RequestReason", "UnitsNeeded", "BloodType",
                   "TotalDonation", "Status", "CreatedAt", "UpdatedAt", "UpdatedBy")
         model = Request
 
@@ -57,11 +61,13 @@ class AddressSchema(ma.Schema):
 
 class DonationCenterSchema(ma.Schema):
     Status = EnumField(Status, by_value=True)
+
     class Meta:
         fields = ("Address", "DonationCenterName", "Status", "UpdatedBy")
         model = DonationCenter
 
 # Timeslot
+
 
 class BloodTypeSchema(ma.Schema):
     class Meta:
@@ -71,12 +77,12 @@ class BloodTypeSchema(ma.Schema):
 
 class EmergencyContactSchema(ma.Schema):
     class Meta:
-        fields = ("ContactName","ContactPhone","BloodType")
+        fields = ("ContactName", "ContactPhone", "BloodType")
         model = EmergencyContact
 
-# class DonationHistorySchema(ma.Schema):
-#     class Meta:
-#         fields = ("CreatedAt","AppointmentId")
+class DonationHistorySchema(ma.Schema):
+    class Meta:
+        fields = ("CreatedAt","AppointmentId")
 
 
 userSchema = UserSchema()
@@ -99,6 +105,7 @@ userCredential = api.model("UserCredential", {
 
 appointmentSchema = AppointmentSchema(many=True)
 appointment = api.model("Appointment", {
+    "AppointmentId": fields.Integer,
     "StartDate": fields.DateTime,
     "EndDate": fields.DateTime,
     "StartTime": fields.DateTime,
@@ -109,6 +116,7 @@ appointment = api.model("Appointment", {
 
 eventSchema = EventSchema(many=True)
 event = api.model("Event", {
+    "EventId":fields.Integer,
     "EventName": fields.String,
     "EventGoal": fields.String,
     "EventOrganizer": fields.Integer,
@@ -121,6 +129,7 @@ event = api.model("Event", {
 
 requestSchema = RequestSchema(many=True)
 request = api.model("Request", {
+    "RequestId":fields.Integer,
     "RequestReason": fields.String,
     "UnitsNeeded": fields.Integer,
     "TotalDonation": fields.Integer,
@@ -152,13 +161,13 @@ donationCenter = api.model("DonationCenter", {
 })
 
 bloodTypeSchema = BloodTypeSchema()
-bloodTypeSchema = api.model("Blood Type",{
-    "BloodTypeName":fields.String,
-    "BloodTypeDescription":fields.String,
+bloodTypeSchema = api.model("Blood Type", {
+    "BloodTypeName": fields.String,
+    "BloodTypeDescription": fields.String,
 })
 
 emergencyContactSchema = EmergencyContactSchema()
-emergencyContact = api.model("EmergencyContact",{
-    "ContactName":fields.String,
-    "ContactPhone":fields.String
+emergencyContact = api.model("EmergencyContact", {
+    "ContactName": fields.String,
+    "ContactPhone": fields.String
 })

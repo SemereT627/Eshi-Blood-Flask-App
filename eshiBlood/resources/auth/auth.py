@@ -1,15 +1,17 @@
 from flask_restplus import Resource, Namespace
-from eshiBlood.models.models import UserCredential, User
+from eshiBlood.models.models import UserCredential, User, UserRole
 from eshiBlood import bcrypt, db
 from eshiBlood.routes.routes import api
 from eshiBlood.schema.ma import userCredential, user, userSchema
 from datetime import datetime
-from flask_jwt import jwt_required
+# from flask_jwt import jwt_required
+from eshiBlood.utils.role_jwt import role_required, getTokenUserId, setToken
 
 auth_ns = Namespace('auth')
 
 @auth_ns.route('/login')
 class UserLoginResource(Resource):
+    
     @auth_ns.expect(userCredential)
     def post(self):
         data = api.payload
@@ -17,16 +19,23 @@ class UserLoginResource(Resource):
         if data['Email'] != "" and data['Password'] != "":
             userCredential = UserCredential.query.filter_by(
                 Email=data['Email']).first()
-            
+            user = User.query.filter_by(
+                UserCredential=userCredential.UserCredentialId
+            ).first()
+
+            role = UserRole.query.filter_by(UserRoleId=user.UserRole).first()
             if userCredential and data['Password'] == userCredential.Password:
-                return {"message": "Logged in successfully"}, 200
+                roleStr = str(role.RoleName).split('.')[-1]
+                # tok = str(setToken(user.UserId,roleStr),'utf-8')
+                # print(setToken(user.UserId,roleStr))
+                # return {"x":"y"}
+                return setToken(user.UserId,roleStr), 200
             else:
                 return {"message": "Email or password incorrect"}, 400
 
         return {"message": "user not found"}, 400    
 
-
-    @jwt_required()    
+    @role_required('Donor')
     def get(self):
         return {"Message":"You are Logged In"}
 
@@ -47,13 +56,20 @@ class UserRegisterResource(Resource):
             Gender=newRegisteredUser["Gender"],
             MartialStatus=newRegisteredUser["MaritalStatus"], 
             )
-        
-        newCredentialUser = payload
+        userRole = UserRole.query.filter_by(RoleName="Donor").first()
+        userRole.Users.append(newUser)
+
+        newUserCredential = payload
         newCredential = UserCredential(
-            Email=newCredentialUser["Email"],
-            Password=newCredentialUser["Password"]
+            Email=newUserCredential["Email"],
+            Password=newUserCredential["Password"]
         )
-        print(newCredentialUser)
+        newCredential.User = newUser
+        print(newUserCredential)
+        
+        # newUserRole = UserRole
+        
+        
         db.session.add(newCredential)
         db.session.commit()
 
