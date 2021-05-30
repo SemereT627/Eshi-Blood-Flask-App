@@ -21,7 +21,8 @@ def role_required(roleArg):
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            token = request.args.get("token")
+            # token = request.args.get("token")
+            token = request.headers.get("token")
 
             if not token:
 
@@ -45,7 +46,8 @@ def role_required(roleArg):
 
 
 def getTokenUserId(req):
-    token = req.args.get("token")
+    token = request.headers.get("token")
+    # token = request.args.get("token")
     data = jwt.decode(token, app.config['SECRET_KEY'])
     return data["id"]
 
