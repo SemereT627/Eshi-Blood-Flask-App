@@ -62,27 +62,27 @@ def setToken(id,role):
     # return jsonify(token=token)
 
 
-def register():
+# def register():
     # password = request.form["password"]
     # form input
     # form validate
     # database create
     # query roles
-    print(password+"-------------------------------")
-    if(password == "password"):
-        token = str(jwt.encode({'id': '1', "role": "User", 'exp': datetime.datetime.utcnow(
-        ) + datetime.timedelta(seconds=1005)}, app.config['SECRET_KEY']), "utf-8")# perform crud and assign id and role after finishing registration >> token to be saved in session storage
-        return jsonify(token=token)
-    return "invalid password"
+    # print(password+"-------------------------------")
+    # if(password == "password"):
+    #     token = str(jwt.encode({'id': '1', "role": "User", 'exp': datetime.datetime.utcnow(
+    #     ) + datetime.timedelta(seconds=1005)}, app.config['SECRET_KEY']), "utf-8")# perform crud and assign id and role after finishing registration >> token to be saved in session storage
+    #     return jsonify(token=token)
+    # return "invalid password"
 
 
 
-@role_required("Admin")  # Admin role only
-def adminPage():
-    return "Accessible by Admin only"
+# @role_required("Admin")  # Admin role only
+# def adminPage():
+#     return "Accessible by Admin only"
 
 
-@role_required("User")  # User role only
-def userPage():
-    print(getTokenUserId(request)+"qqqqqqqqqqqqqqqqqqqq")
-    return "Accessible by User only"
+# @role_required("User")  # User role only
+# def userPage():
+#     print(getTokenUserId(request)+"qqqqqqqqqqqqqqqqqqqq")
+#     return "Accessible by User only"
