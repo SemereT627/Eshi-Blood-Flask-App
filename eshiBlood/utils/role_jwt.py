@@ -34,7 +34,7 @@ def role_required(roleArg):
                     # work db ops
                     print(data["role"])
                 else:
-                    return jsonify(msg="Admins only!")
+                    return jsonify(msg="Unauthorized personnel")
             except:
                 return jsonify(msg='Token is invalid!')
             return fn(*args, **kwargs)

@@ -7,58 +7,57 @@ from datetime import datetime
 # from flask_jwt import jwt_required
 from eshiBlood.utils.role_jwt import role_required, getTokenUserId, setToken
 
-auth_ns = Namespace('auth')
+auth_admin = Namespace('auth-admin')
 
-@auth_ns.route('/login')
-class UserLoginResource(Resource):
-    
-    @auth_ns.expect(userCredential)
+
+@auth_admin.route('/login')
+class AdminLoginResource(Resource):
     def post(self):
-        data = api.payload
+        payload = api.payload
         
-        if data['Email'] != "" and data['Password'] != "":
+        if payload['Email'] != "" and payload['Password'] != "":
+        
             userCredential = UserCredential.query.filter_by(
-                Email=data['Email']).first()
+                Email=payload['Email']).first()
+            print(userCredential.Email)
             if userCredential:
                 user = User.query.filter_by(
-                    UserCredential=userCredential.UserCredentialId
-                ).first()
+                    UserCredential=userCredential.UserCredentialId).first()
             else:
-                return {"message":"user not found"}
+        
+                return {"message": "admin not found"}
+
             role = UserRole.query.filter_by(UserRoleId=user.UserRole).first()
-            if userCredential and data['Password'] == userCredential.Password:
+            print(role.RoleName)
+            if userCredential and payload['Password'] == userCredential.Password:
                 roleStr = str(role.RoleName).split('.')[-1]
-                # tok = str(setToken(user.UserId,roleStr),'utf-8')
-                # print(setToken(user.UserId,roleStr))
-                # return {"x":"y"}
-                return setToken(user.UserId,roleStr), 200
-            else:
-                return {"message": "Email or password incorrect"}, 400
-
-        return {"message": "Incorrect email or password"}, 400    
-
-    @role_required('Donor')
+        
+                return setToken(user.UserId, roleStr), 200
+            
+        return {"message": "Incorrect email or password"}, 400
+    
+    @role_required('Admin')
     def get(self):
-        return {"Message":"You are Logged In"}
+        return {"message": "you are logged in"}, 200
 
-@auth_ns.route('/register')
+
+@auth_admin.route('/register')
 class UserRegisterResource(Resource):
-    @auth_ns.expect(user)
+    @auth_admin.expect(user)
     def post(self):
         payload = api.payload
         newRegisteredUser = payload
         newUser = User(
-            FirstName=newRegisteredUser["FirstName"], 
-            LastName=newRegisteredUser["LastName"], 
-            UserName=newRegisteredUser["UserName"], 
+            FirstName=newRegisteredUser["FirstName"],
+            LastName=newRegisteredUser["LastName"],
+            UserName=newRegisteredUser["UserName"],
             BirthDate=newRegisteredUser["BirthDate"],
-            # is deleted
             CreatedAt=datetime.utcnow(),
             UpdatedAt=datetime.utcnow(),
             Gender=newRegisteredUser["Gender"],
-            MartialStatus=newRegisteredUser["MaritalStatus"], 
-            )
-        userRole = UserRole.query.filter_by(RoleName="Donor").first()
+            MartialStatus=newRegisteredUser["MaritalStatus"],
+        )
+        userRole = UserRole.query.filter_by(RoleName="Admin").first()
         userRole.Users.append(newUser)
 
         newUserCredential = payload
@@ -68,10 +67,9 @@ class UserRegisterResource(Resource):
         )
         newCredential.User = newUser
         print(newUserCredential)
-        
+
         # newUserRole = UserRole
-        
-        
+
         db.session.add(newCredential)
         db.session.commit()
 
@@ -79,4 +77,3 @@ class UserRegisterResource(Resource):
         db.session.add(newUser)
         db.session.commit()
         return userSchema.dump(newUser)
-
