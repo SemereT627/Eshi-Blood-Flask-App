@@ -21,7 +21,10 @@ def role_required(roleArg):
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            token = request.args.get("token")
+            # token = request.args.get("token")
+            # token = request.headers.get("token")
+            token = request.cookies.get("token")
+            print(f"cookies {token}")
 
             if not token:
 
@@ -45,15 +48,23 @@ def role_required(roleArg):
 
 
 def getTokenUserId(req):
-    token = req.args.get("token")
+    # token = request.headers.get("token")
+    # token = request.args.get("token")
+    token = request.cookies.get("token")
+    print(f"cookies {token}")
     data = jwt.decode(token, app.config['SECRET_KEY'])
     return data["id"]
 
 def setToken(id,role):
-    token = str(jwt.encode({'id': id, "role": role, 'exp': datetime.datetime.utcnow(
-        ) + datetime.timedelta(seconds=1005)}, app.config['SECRET_KEY']), "utf-8")# perform crud and assign id and role after finishing registration >> token to be saved in session storage
-    return {"token":token}
+    # try:
+    token = str(jwt.encode({'id': id, "role": role, 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=1005)}, app.config['SECRET_KEY']), "utf-8")
+        # perform crud and assign id and role after finishing registration >> token to be saved in session storage
+    # except:
+    #     print("exceeeeeeeeeeeeeeeeeeeeeeept")
+    return token
 
+def unsetToken():
+    return ""
 
 
 # @app.route("/login",methods=["POST"])
