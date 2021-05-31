@@ -17,8 +17,10 @@ class UserLoginResource(Resource):
         data = api.payload
         
         if data['Email'] != "" and data['Password'] != "":
+            # Finding a user from user credential table
             userCredential = UserCredential.query.filter_by(
                 Email=data['Email']).first()
+                # If user credential is there
             if userCredential:
                 user = User.query.filter_by(
                     UserCredential=userCredential.UserCredentialId
@@ -35,7 +37,7 @@ class UserLoginResource(Resource):
             else:
                 return {"message": "Email or password incorrect"}, 400
 
-        return {"message": "Incorrect email or password"}, 400    
+        return {"message": "Email or password cannot be empty"}, 400    
 
     @role_required('Donor')
     def get(self):

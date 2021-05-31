@@ -27,6 +27,7 @@ class WeekDay(enum.Enum):
     Sunday = "Sunday"
 
 class Role(enum.Enum):
+    SuperAdmin = "SuperAdmin"
     Admin = "Admin"
     Donor = "Donor"
     Nurse = "Nurse"

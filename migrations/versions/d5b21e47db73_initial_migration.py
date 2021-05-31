@@ -1,8 +1,8 @@
-"""Initial Migration
+"""Initial migration
 
-Revision ID: 3c933bef9f19
+Revision ID: d5b21e47db73
 Revises: 
-Create Date: 2021-05-29 17:58:10.959226
+Create Date: 2021-06-01 01:59:09.388690
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3c933bef9f19'
+revision = 'd5b21e47db73'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,7 +46,7 @@ def upgrade():
     )
     op.create_table('UserRole',
     sa.Column('UserRoleId', sa.Integer(), nullable=False),
-    sa.Column('RoleName', sa.Enum('Admin', 'Donor', 'Nurse', name='role'), nullable=True),
+    sa.Column('RoleName', sa.Enum('SuperAdmin', 'Admin', 'Donor', 'Nurse', name='role'), nullable=True),
     sa.PrimaryKeyConstraint('UserRoleId')
     )
     op.create_table('EmergencyContact',
@@ -105,8 +105,6 @@ def upgrade():
     sa.Column('CreatedAt', sa.DateTime(), nullable=True),
     sa.Column('UpdatedAt', sa.DateTime(), nullable=True),
     sa.Column('IsDeleted', sa.Integer(), nullable=True),
-    sa.Column('CreatedBy', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['CreatedBy'], ['User.UserId'], ),
     sa.ForeignKeyConstraint(['EventOrganizer'], ['User.UserId'], ),
     sa.PrimaryKeyConstraint('EventId')
     )
