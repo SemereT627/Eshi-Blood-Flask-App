@@ -33,13 +33,23 @@ class RequestResource(Resource):
         db.session.commit()
         return {"message":"Ok"}
 
+    def delete(self,id):
+        '''
+        Deletes a request
+        '''
+        result = Request.query.filter_by(RequestId=id).first()
+        result.IsDeleted = 1
+        db.session.commit()
+        return {"message":"deleted successfully"}
+
+
 @request_ns.route('')
 class RequestsResource(Resource):
     def get(self):
         '''
         Show all requests
         '''
-        data = Request.query.all()
+        data = Request.query.filter_by(IsDeleted=0).all()
         return requestSchema.dump(data)
 
     @request_ns.expect(request)
@@ -54,7 +64,8 @@ class RequestsResource(Resource):
             TotalDonation=payload["TotalDonation"],
             Status=payload["Status"],
             CreatedAt=datetime.utcnow(),
-            UpdatedAt=datetime.utcnow()
+            UpdatedAt=datetime.utcnow(),
+            IsDeleted=0
         )
         db.session.add(newRequest)
         db.session.commit()

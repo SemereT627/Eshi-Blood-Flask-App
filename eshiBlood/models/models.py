@@ -14,7 +14,7 @@ Request_BloodType_Association = db.Table("Request_BloodType_Association", db.Mod
 
 class User(db.Model):
     __tablename__ = "User"
-    UserId = db.Column(db.Integer, primary_key=True)
+    UserId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     FirstName = db.Column(db.String, nullable=False)
     LastName = db.Column(db.String)
     UserName = db.Column(db.String)
@@ -33,12 +33,16 @@ class User(db.Model):
     UserCredential = db.Column(db.Integer, db.ForeignKey(
         "UserCredential.UserCredentialId"))
     UserRole = db.Column(db.Integer, db.ForeignKey("UserRole.UserRoleId"))
-    EmergencyContact = db.Column(db.Integer, db.ForeignKey("EmergencyContact.EmergencyContactId"))
+    EmergencyContact = db.Column(db.Integer, db.ForeignKey(
+        "EmergencyContact.EmergencyContactId"))
 
 # UserCredential
+
+
 class UserCredential(db.Model):
     __tablename__ = "UserCredential"
-    UserCredentialId = db.Column(db.Integer, primary_key=True)
+    UserCredentialId = db.Column(
+        db.Integer, primary_key=True, autoincrement=True)
     Email = db.Column(db.String, nullable=False)
     Password = db.Column(db.String, nullable=False)
     User = relationship(
@@ -135,10 +139,12 @@ class Address(db.Model):
     AddressLine = db.Column(db.String)
     PostCode = db.Column(db.String)
     PhoneNumber = db.Column(db.String)
-    User = relationship("User",backref="userAddressBackref",uselist=False)
-    Request = relationship("Request",backref="RequestBackref",uselist=False)
+    User = relationship("User", backref="userAddressBackref", uselist=False)
+    Request = relationship("Request", backref="RequestBackref", uselist=False)
 
 # DonationCenter
+
+
 class DonationCenter(db.Model):
     __tablename__ = "DonationCenter"
 
@@ -188,7 +194,8 @@ class EmergencyContact(db.Model):
     EmergencyContactId = db.Column(db.Integer, primary_key=True)
     ContactName = db.Column(db.String)
     ContactPhone = db.Column(db.String)
-    User = relationship("User",backref="emeregencycontactuserbackref",uselist=False)
+    User = relationship(
+        "User", backref="emeregencycontactuserbackref", uselist=False)
     BloodType = db.Column(db.Integer, db.ForeignKey("BloodType.BloodTypeId"))
 # user
 

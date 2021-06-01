@@ -1,8 +1,8 @@
-"""Initial migration
+"""Initial Migration
 
-Revision ID: d5b21e47db73
+Revision ID: 68896c30bca3
 Revises: 
-Create Date: 2021-06-01 01:59:09.388690
+Create Date: 2021-06-01 20:20:20.623998
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd5b21e47db73'
+revision = '68896c30bca3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,7 +39,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('BloodTypeId')
     )
     op.create_table('UserCredential',
-    sa.Column('UserCredentialId', sa.Integer(), nullable=False),
+    sa.Column('UserCredentialId', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('Email', sa.String(), nullable=False),
     sa.Column('Password', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('UserCredentialId')
@@ -58,7 +58,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('EmergencyContactId')
     )
     op.create_table('User',
-    sa.Column('UserId', sa.Integer(), nullable=False),
+    sa.Column('UserId', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('FirstName', sa.String(), nullable=False),
     sa.Column('LastName', sa.String(), nullable=True),
     sa.Column('UserName', sa.String(), nullable=True),

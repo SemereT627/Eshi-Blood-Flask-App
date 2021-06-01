@@ -38,6 +38,15 @@ class AppointmentResource(Resource):
 
         return appointmentSchema.dump([result]), 204    
 
+    def delete(self,id):
+        '''
+        Deletes an appointment
+        '''
+        result = Appointment.query.filter_by(AppointmentId=id).first()
+        result.IsDeleted = 1
+        db.session.commit()
+        return {"message":"deleted successfully"}, 200
+
 
 @appointment_ns.route('')
 class AppointmentsResource(Resource):
@@ -45,7 +54,7 @@ class AppointmentsResource(Resource):
         '''
         Show all appointments
         '''
-        data = Appointment.query.all()
+        data = Appointment.query.filter_by(IsDeleted=0).all()
         return appointmentSchema.dump(data)
 
     @appointment_ns.expect(appointment)
@@ -55,14 +64,15 @@ class AppointmentsResource(Resource):
         '''
         payload = api.payload
         newAppointment = Appointment(
-            StartDate=payload["StartDate"],
-            EndDate=payload["EndDate"],
-            StartTime=payload["StartTime"],
-            EndTime=payload["EndTime"],
-            Status=payload["Status"],
+            # StartDate=payload["StartDate"],
+            # EndDate=payload["EndDate"],
+            # StartTime=payload["StartTime"],
+            # EndTime=payload["EndTime"],
+            # Status=payload["Status"],
             AppointmentDescription=payload["AppointmentDescription"],
             CreatedAt=datetime.utcnow(),
-            UpdatedAt=datetime.utcnow()
+            UpdatedAt=datetime.utcnow(),
+            IsDeleted=0
         )
         db.session.add(newAppointment)
         db.session.commit()

@@ -11,7 +11,7 @@ donation_center_ns = Namespace('donation-centers')
 @donation_center_ns.route('/<int:id>')
 class DonationCenterResource(Resource):
     @donation_center_ns.expect(donationCenter)
-    def get(self,id):
+    def get(self, id):
         '''
         Show a single donation center
         '''
@@ -27,11 +27,21 @@ class DonationCenterResource(Resource):
         result = DonationCenter.query.filter_by(DonationCenterId=id).first()
         payload = api.payload
         result.Address = payload["Address"]
-        result.DonationCenterName=payload["DonationCenterName"]
-        result.Status= payload["Status"]
+        result.DonationCenterName = payload["DonationCenterName"]
+        result.Status = payload["Status"]
         result.AppointmentDescription = payload["AppointmentDescription"]
 
         return donationCenterSchema.dump([result])
+
+    def delete(self, id):
+        '''
+        Deletes a request
+        '''
+        result = DonationCenter.query.filter_by(DonationCenterId=id).first()
+        result.IsDeleted = 1
+        db.session.commit()
+        return {"message": "deleted successfully"}
+
 
 @donation_center_ns.route('')
 class DonationCentersResource(Resource):
@@ -39,7 +49,7 @@ class DonationCentersResource(Resource):
         '''
         Show all donation centers
         '''
-        data = DonationCenter.query.all()
+        data = DonationCenter.query.filter_by(IsDeleted=0).all()
         return donationCenterSchema.dump(data)
 
     @donation_center_ns.expect(donationCenter)
@@ -52,8 +62,9 @@ class DonationCentersResource(Resource):
             DonationCenterName=payload["DonationCenterName"],
             Status=payload["Status"],
             CreatedAt=datetime.utcnow(),
-            UpdatedAt=datetime.utcnow()
+            UpdatedAt=datetime.utcnow(),
+            IsDeleted=0
         )
         db.session.add(newDonationCenter)
         db.session.commit()
-        return {"message":"donation center created successfully"}, 201
+        return {"message": "donation center created successfully"}, 201

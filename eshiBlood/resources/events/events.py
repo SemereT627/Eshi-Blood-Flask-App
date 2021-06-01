@@ -34,6 +34,14 @@ class EventResource(Resource):
         db.session.commit()
         return {"message": "OK"}, 204 #It updates check with status code 200
 
+    def delete(self,id):
+        '''
+        Deletes an event
+        '''
+        result = Event.query.filter_by(EventId=id).first()
+        result.IsDeleted = 1
+        db.session.commit()
+        return {"message":"deleted successfully"}
 
 @event_ns.route('')
 class EventsResource(Resource):
@@ -41,7 +49,7 @@ class EventsResource(Resource):
         '''
         Show all events
         '''
-        data = Event.query.all()
+        data = Event.query.filter_by(IsDeleted=0).all()
         return eventSchema.dump(data)
 
     @event_ns.expect(event)
@@ -57,6 +65,7 @@ class EventsResource(Resource):
             Status=payload["Status"],
             CreatedAt=datetime.utcnow(),
             UpdatedAt=datetime.utcnow(),
+            IsDeleted=0
         )
         db.session.add(newEvent)
         db.session.commit()

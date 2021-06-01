@@ -63,7 +63,7 @@ class DonationCenterSchema(ma.Schema):
     Status = EnumField(Status, by_value=True)
 
     class Meta:
-        fields = ("Address", "DonationCenterName", "Status", "UpdatedBy")
+        fields = ("DonationCenterName", "Status", "UpdatedBy")
         model = DonationCenter
 
 # Timeslot
@@ -154,7 +154,6 @@ address = api.model("Address", {
 
 donationCenterSchema = DonationCenterSchema(many=True)
 donationCenter = api.model("DonationCenter", {
-    "Address": fields.String,
     "DonationCenterName": fields.String,
     "Status": fields.String(description="The object type", enum=["Active", "Pending", "Closed"]),
     "AppointmentDescription": fields.String
