@@ -93,7 +93,7 @@ def invitation_required(invitedAs):
             # token = request.args.get("token")
             # token = request.headers.get("token")
             invitation_token = request.cookies.get("invitation-token")
-            print(f"cookies {token}")
+            print(f"cookies {invitation_token}")
 
             if (invitation_token!= None or invitation_token!=""):
 
@@ -102,7 +102,7 @@ def invitation_required(invitedAs):
                 # print("*************" +str(jwt.decode(token,'my_secret_key')))
                 data = jwt.decode(invitation_token, app.config['SECRET_KEY'])
                 print(data["invitation-token"])
-                if data["role"] == invitedAs:
+                if data["invitation-token"] == invitedAs:
                     # work db ops
                     print(data["invitation-token"])
                 else:
@@ -123,6 +123,14 @@ def setInviteToken(invitedAs):
 
 
 def isValidInviteToken(inviteToken):
+
+    """isValidInviteToken
+    
+    Keyword arguments:
+    inviteToken -- string of token from cookie
+    Return: Boolean
+    """
+    
     try:
         jwt.decode(inviteToken,app.config["SECRET_KEY"])
         return True
