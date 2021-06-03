@@ -1,4 +1,5 @@
 from flask_restplus import Resource, Namespace
+import flask
 from eshiBlood.models.models import UserCredential, User, UserRole
 from eshiBlood import bcrypt, db
 from eshiBlood.routes.routes import api
@@ -6,20 +7,21 @@ import flask
 from eshiBlood.schema.ma import userCredential, user, userSchema
 from datetime import datetime
 from sqlalchemy import exc
-# from flask_jwt import jwt_required
 from eshiBlood.utils.role_jwt import role_required, getTokenUserId, setToken
 
-auth_ns = Namespace('auth')
 
 
-@auth_ns.route('/login')
+
+donor_auth_ns = Namespace('auth-donor')
+#************************************************** DONOR auth begin ******************************************************
+@donor_auth_ns.route('/login')
 class UserLoginResource(Resource):
-    token = ''
-
-    @auth_ns.expect(userCredential)
+    
+    @donor_auth_ns.expect(userCredential)
     def post(self):
         data = api.payload
-
+        print("**************** auth-donor-login")
+        
         if data['Email'] != "" and data['Password'] != "":
             # Finding a user from user credential table
             userCredential = UserCredential.query.filter_by(
@@ -39,14 +41,11 @@ class UserLoginResource(Resource):
                 # return {"x":"y"}
                 response = flask.make_response()
                 response.status_code = 200
-                tokenValue = setToken(user.UserId, roleStr)
-                self.token = tokenValue
+                tokenValue = setToken(user.UserId,roleStr)
                 # response.set_cookie("token",value = tokenValue,expires=10000000000,httponly=True)
                 print(tokenValue)
-                print(
-                    f"{userCredential.Password} {data['Password'] == userCredential.Password}")
-                response.set_cookie(
-                    key="token", value=tokenValue, expires=10000000000, httponly=True)
+                print(f"{userCredential.Password} {data['Password'] == userCredential.Password}")
+                response.set_cookie(key="token",value = tokenValue,expires=10000000000,httponly=True)
                 return response
             else:
                 return {"message": "Email or password incorrect"}, 400
@@ -59,9 +58,10 @@ class UserLoginResource(Resource):
         return {"Message": "You are Logged In"}
 
 
-@auth_ns.route('/register')
+
+@donor_auth_ns.route('/register')
 class UserRegisterResource(Resource):
-    @auth_ns.expect(user)
+    @donor_auth_ns.expect(user)
     def post(self):
         payload = api.payload
         newUser = User(
@@ -90,10 +90,7 @@ class UserRegisterResource(Resource):
         try:
             db.session.add(newCredential)
             db.session.commit()
-
-            print(newUser)
-            db.session.add(newUser)
-            db.session.commit()
         except exc.IntegrityError:
             pass
-        return userSchema.dump(newUser)
+
+#************************************************** DONOR auth end ******************************************************

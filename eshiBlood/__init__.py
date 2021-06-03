@@ -27,4 +27,4 @@ from eshiBlood.models import models
 from eshiBlood.routes.routes import api
 
 from eshiBlood.utils.initializer import initialize
-initialize()
+# initialize()
