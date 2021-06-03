@@ -1,4 +1,5 @@
 from flask_restplus import Resource, Namespace
+import flask
 from eshiBlood.models.models import UserCredential, User, UserRole
 from eshiBlood import bcrypt, db
 from eshiBlood.routes.routes import api
@@ -7,14 +8,17 @@ from datetime import datetime
 # from flask_jwt import jwt_required
 from eshiBlood.utils.role_jwt import role_required, getTokenUserId, setToken
 
-auth_ns = Namespace('auth')
 
-@auth_ns.route('/login')
+admin_auth_ns = Namespace("auth-admin")
+
+#************************************************** ADMIN auth begin ******************************************************
+@admin_auth_ns.route('/login')
 class UserLoginResource(Resource):
     
-    @auth_ns.expect(userCredential)
+    @admin_auth_ns.expect(userCredential)
     def post(self):
         data = api.payload
+        print("**************** auth-admin-login")
         
         if data['Email'] != "" and data['Password'] != "":
             # Finding a user from user credential table
@@ -33,19 +37,26 @@ class UserLoginResource(Resource):
                 # tok = str(setToken(user.UserId,roleStr),'utf-8')
                 # print(setToken(user.UserId,roleStr))
                 # return {"x":"y"}
-                return setToken(user.UserId,roleStr), 200
+                response = flask.make_response()
+                response.status_code = 200
+                tokenValue = setToken(user.UserId,roleStr)
+                # response.set_cookie("token",value = tokenValue,expires=10000000000,httponly=True)
+                print(tokenValue)
+                # print(f"{userCredential.Password} {data['Password'] == userCredential.Password}")
+                response.set_cookie(key="token",value = tokenValue,expires=10000000000,httponly=True)
+                return response
             else:
                 return {"message": "Email or password incorrect"}, 400
 
-        return {"message": "Email or password cannot be empty"}, 400    
+        return {"message": "Email or password cannot be empty"}, 400     
 
-    @role_required('Donor')
+    @role_required('Admin')
     def get(self):
         return {"Message":"You are Logged In"}
 
-@auth_ns.route('/register')
+@admin_auth_ns.route('/register')
 class UserRegisterResource(Resource):
-    @auth_ns.expect(user)
+    @admin_auth_ns.expect(user)
     def post(self):
         payload = api.payload
         newRegisteredUser = payload
@@ -60,7 +71,7 @@ class UserRegisterResource(Resource):
             Gender=newRegisteredUser["Gender"],
             MartialStatus=newRegisteredUser["MaritalStatus"], 
             )
-        userRole = UserRole.query.filter_by(RoleName="Donor").first()
+        userRole = UserRole.query.filter_by(RoleName="Admin").first()
         userRole.Users.append(newUser)
 
         newUserCredential = payload
@@ -81,4 +92,6 @@ class UserRegisterResource(Resource):
         db.session.add(newUser)
         db.session.commit()
         return userSchema.dump(newUser)
+
+#************************************************** ADMIN auth end ******************************************************
 
