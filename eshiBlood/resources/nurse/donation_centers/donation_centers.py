@@ -4,15 +4,13 @@ from eshiBlood import db
 from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import donationCenter, donationCenterSchema
-from eshiBlood.utils.role_jwt import role_required, getTokenUserId
 
-donation_centers_admin_ns = Namespace('admin/donation-centers')
+donation_center_nurse_ns = Namespace('nurse/donation-centers')
 
 
-@donation_centers_admin_ns.route('/<int:id>')
+@donation_center_nurse_ns.route('/<int:id>')
 class DonationCenterResource(Resource):
-    @role_required('SuperAdmin')
-    @donation_centers_admin_ns.expect(donationCenter)
+    @donation_center_nurse_ns.expect(donationCenter)
     def get(self, id):
         '''
         Show a single donation center
@@ -21,8 +19,7 @@ class DonationCenterResource(Resource):
         print(data)
         return donationCenterSchema.dump([data])
 
-    @role_required('SuperAdmin')
-    @donation_centers_admin_ns.expect(donationCenter)
+    @donation_center_nurse_ns.expect(donationCenter)
     def put(self, id):
         '''
         Updates an appointment
@@ -36,7 +33,6 @@ class DonationCenterResource(Resource):
 
         return donationCenterSchema.dump([result])
 
-    @role_required('SuperAdmin')
     def delete(self, id):
         '''
         Deletes a request
@@ -47,18 +43,9 @@ class DonationCenterResource(Resource):
         return {"message": "deleted successfully"}
 
 
-@donation_centers_admin_ns.route('')
-class DonationCentersResource(Resource):
-    @role_required('SuperAdmin')
-    def get(self):
-        '''
-        Show all donation centers
-        '''
-        data = DonationCenter.query.filter_by(IsDeleted=0).all()
-        return donationCenterSchema.dump(data)
-
-    @role_required('SuperAdmin')
-    @donation_centers_admin_ns.expect(donationCenter)
+@donation_center_nurse_ns.route('')
+class DonationCentersResource(Resource):   
+    @donation_center_nurse_ns.expect(donationCenter)
     def post(self):
         '''
         Creates a donation center

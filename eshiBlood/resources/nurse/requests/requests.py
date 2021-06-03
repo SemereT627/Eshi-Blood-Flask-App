@@ -5,11 +5,11 @@ from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import requestSchema, request
 
-request_donor_ns = Namespace('donor/requests')
+request_nurse_ns = Namespace('nurse/requests')
 
-@request_donor_ns.route('/<int:id>')
+@request_nurse_ns.route('/<int:id>')
 class RequestResource(Resource):
-    @request_donor_ns.expect(request)
+    @request_nurse_ns.expect(request)
     def get(self,id):
         '''
         Show single request
@@ -18,7 +18,7 @@ class RequestResource(Resource):
         print(data)
         return requestSchema.dump([data])
 
-    @request_donor_ns.expect(request)
+    @request_nurse_ns.expect(request)
     def put(self,id):
         '''
         Updates a request
@@ -43,9 +43,9 @@ class RequestResource(Resource):
         return {"message":"deleted successfully"}
 
 
-@request_donor_ns.route('')
+@request_nurse_ns.route('')
 class RequestsResource(Resource):
-    @request_donor_ns.expect(request)
+    @request_nurse_ns.expect(request)
     def post(self):
         '''
         Creates new request

@@ -4,15 +4,13 @@ from eshiBlood import db
 from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import eventSchema, event
-from eshiBlood.utils.role_jwt import role_required, getTokenUserId
 
-event_admin_ns = Namespace('admin/events')
+event_nurse_ns = Namespace('nurse/events')
 
 
-@event_admin_ns.route('/<int:id>')
+@event_nurse_ns.route('/<int:id>')
 class EventResource(Resource):
-    @role_required('SuperAdmin')
-    @event_admin_ns.expect(event)
+    @event_nurse_ns.expect(event)
     def get(self, id):
         '''
         Show single event
@@ -21,8 +19,7 @@ class EventResource(Resource):
         print(data)
         return eventSchema.dump([data])
 
-    @role_required('SuperAdmin')
-    @event_admin_ns.expect(event)
+    @event_nurse_ns.expect(event)
     def put(self, id):
         '''
         Updates an event
@@ -37,7 +34,6 @@ class EventResource(Resource):
         db.session.commit()
         return {"message": "OK"}, 204 #It updates check with status code 200
 
-    @role_required('SuperAdmin')
     def delete(self,id):
         '''
         Deletes an event
@@ -47,18 +43,9 @@ class EventResource(Resource):
         db.session.commit()
         return {"message":"deleted successfully"}
 
-@event_admin_ns.route('')
+@event_nurse_ns.route('')
 class EventsResource(Resource):
-    @role_required('SuperAdmin')
-    def get(self):
-        '''
-        Show all events
-        '''
-        data = Event.query.filter_by(IsDeleted=0).all()
-        return eventSchema.dump(data)
-
-    @role_required('SuperAdmin')
-    @event_admin_ns.expect(event)
+    @event_nurse_ns.expect(event)
     def post(self):
         '''
         Creates an event

@@ -5,12 +5,12 @@ from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import donationCenter, donationCenterSchema
 
-donation_center_ns = Namespace('donor/donation-centers')
+donation_center_donor_ns = Namespace('donor/donation-centers')
 
 
-@donation_center_ns.route('/<int:id>')
+@donation_center_donor_ns.route('/<int:id>')
 class DonationCenterResource(Resource):
-    @donation_center_ns.expect(donationCenter)
+    @donation_center_donor_ns.expect(donationCenter)
     def get(self, id):
         '''
         Show a single donation center
@@ -19,7 +19,7 @@ class DonationCenterResource(Resource):
         print(data)
         return donationCenterSchema.dump([data])
 
-    @donation_center_ns.expect(donationCenter)
+    @donation_center_donor_ns.expect(donationCenter)
     def put(self, id):
         '''
         Updates an appointment
@@ -43,9 +43,9 @@ class DonationCenterResource(Resource):
         return {"message": "deleted successfully"}
 
 
-@donation_center_ns.route('')
+@donation_center_donor_ns.route('')
 class DonationCentersResource(Resource):   
-    @donation_center_ns.expect(donationCenter)
+    @donation_center_donor_ns.expect(donationCenter)
     def post(self):
         '''
         Creates a donation center

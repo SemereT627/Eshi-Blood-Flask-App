@@ -1,0 +1,4 @@
+from eshiBlood.resources.nurse.appointments.appointments import appointment_nurse_ns
+from eshiBlood.resources.nurse.donation_centers.donation_centers import donation_center_nurse_ns
+from eshiBlood.resources.nurse.events.events import event_nurse_ns
+from eshiBlood.resources.nurse.requests.requests import request_nurse_ns

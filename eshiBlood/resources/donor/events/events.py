@@ -5,12 +5,12 @@ from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import eventSchema, event
 
-event_ns = Namespace('donor/events')
+event_donor_ns = Namespace('donor/events')
 
 
-@event_ns.route('/<int:id>')
+@event_donor_ns.route('/<int:id>')
 class EventResource(Resource):
-    @event_ns.expect(event)
+    @event_donor_ns.expect(event)
     def get(self, id):
         '''
         Show single event
@@ -19,7 +19,7 @@ class EventResource(Resource):
         print(data)
         return eventSchema.dump([data])
 
-    @event_ns.expect(event)
+    @event_donor_ns.expect(event)
     def put(self, id):
         '''
         Updates an event
@@ -43,9 +43,9 @@ class EventResource(Resource):
         db.session.commit()
         return {"message":"deleted successfully"}
 
-@event_ns.route('')
+@event_donor_ns.route('')
 class EventsResource(Resource):
-    @event_ns.expect(event)
+    @event_donor_ns.expect(event)
     def post(self):
         '''
         Creates an event

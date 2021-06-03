@@ -1,0 +1,4 @@
+from eshiBlood.resources.donor.appointments.appointments import appointment_donor_ns
+from eshiBlood.resources.donor.donation_centers.donation_centers import donation_center_donor_ns
+from eshiBlood.resources.donor.events.events import event_donor_ns
+from eshiBlood.resources.donor.requests.requests import request_donor_ns

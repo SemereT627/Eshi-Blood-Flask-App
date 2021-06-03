@@ -4,12 +4,14 @@ from eshiBlood import db
 from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import requestSchema, request
+from eshiBlood.utils.role_jwt import role_required, getTokenUserId
 
-request_ns = Namespace('admin/requests')
+request_admin_ns = Namespace('admin/requests')
 
-@request_ns.route('/<int:id>')
+@request_admin_ns.route('/<int:id>')
 class RequestResource(Resource):
-    @request_ns.expect(request)
+    @role_required('SuperAdmin')
+    @request_admin_ns.expect(request)
     def get(self,id):
         '''
         Show single request
@@ -18,7 +20,8 @@ class RequestResource(Resource):
         print(data)
         return requestSchema.dump([data])
 
-    @request_ns.expect(request)
+    @role_required('SuperAdmin')
+    @request_admin_ns.expect(request)
     def put(self,id):
         '''
         Updates a request
@@ -33,6 +36,7 @@ class RequestResource(Resource):
         db.session.commit()
         return {"message":"Ok"}
 
+    @role_required('SuperAdmin')
     def delete(self,id):
         '''
         Deletes a request
@@ -43,8 +47,9 @@ class RequestResource(Resource):
         return {"message":"deleted successfully"}
 
 
-@request_ns.route('')
+@request_admin_ns.route('')
 class RequestsResource(Resource):
+    @role_required('SuperAdmin')
     def get(self):
         '''
         Show all requests
@@ -52,7 +57,8 @@ class RequestsResource(Resource):
         data = Request.query.filter_by(IsDeleted=0).all()
         return requestSchema.dump(data)
 
-    @request_ns.expect(request)
+    @role_required('SuperAdmin')
+    @request_admin_ns.expect(request)
     def post(self):
         '''
         Creates new request

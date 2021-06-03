@@ -18,7 +18,7 @@ class UserLoginResource(Resource):
     @admin_auth_ns.expect(userCredential)
     def post(self):
         data = api.payload
-        print("**************** auth-admin-login")
+        print("****************auth-admin-login****************")
         
         if data['Email'] != "" and data['Password'] != "":
             # Finding a user from user credential table

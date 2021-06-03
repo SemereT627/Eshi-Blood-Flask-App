@@ -6,13 +6,13 @@ from datetime import datetime
 from eshiBlood.schema.ma import appointmentSchema, appointment
 from eshiBlood.utils.role_jwt import role_required,getTokenUserId
 
-appointment_admin_ns = Namespace('admin/appointments')
+appointment_nurse_ns = Namespace('nurse/appointments')
 
 
-@appointment_admin_ns.route('/<int:id>')
+@appointment_nurse_ns.route('/<int:id>')
 class AppointmentResource(Resource):
-    @role_required('SuperAdmin')
-    @appointment_admin_ns.expect(appointment)
+    @appointment_nurse_ns.expect(appointment)
+
     def get(self, id):
         '''
         Show single appointment
@@ -21,8 +21,7 @@ class AppointmentResource(Resource):
         print(data.AppointmentId)
         return appointmentSchema.dump([data])
 
-    @role_required('SuperAdmin')
-    @appointment_admin_ns.expect(appointment)
+    @appointment_nurse_ns.expect(appointment)
     def put(self, id):
         '''
         Updates an appointment
@@ -41,7 +40,6 @@ class AppointmentResource(Resource):
 
         return appointmentSchema.dump([result]), 204    
 
-    @role_required('SuperAdmin')
     def delete(self,id):
         '''
         Deletes an appointment
@@ -52,18 +50,9 @@ class AppointmentResource(Resource):
         return {"message":"deleted successfully"}, 200
 
 
-@appointment_admin_ns.route('')
+@appointment_nurse_ns.route('')
 class AppointmentsResource(Resource):
-    @role_required('SuperAdmin')
-    def get(self):
-        '''
-        Show all appointments
-        '''
-        data = Appointment.query.filter_by(IsDeleted=0).all()
-        return appointmentSchema.dump(data)
-
-    @role_required('SuperAdmin')
-    @appointment_admin_ns.expect(appointment)
+    @appointment_nurse_ns.expect(appointment)
     def post(self):
         '''
         Creates an appointment

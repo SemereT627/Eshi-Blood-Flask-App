@@ -1,0 +1,1727 @@
+{
+	"info": {
+		"_postman_id": "600e22d1-7156-4208-8687-74ede73e46b2",
+		"name": "EshiBloodFlask API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "appointment",
+					"item": [
+						{
+							"name": "/admin/appointments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"Status\": \"Active\",\n  \"AppointmentDescription\": \"New Appointment3\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/appointments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/appointments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/appointments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/appointments/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/appointments/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"StartDate\": \"2021-05-27T22:09:50.706Z\",\n  \"EndDate\": \"2021-05-27T22:09:50.706Z\",\n  \"StartTime\": \"2021-05-27T22:09:50.706Z\",\n  \"EndTime\": \"2021-05-27T22:09:50.706Z\",\n  \"Status\": \"Pending\",\n  \"AppointmentDescription\": \"Updated Description 2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/appointments/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "event",
+					"item": [
+						{
+							"name": "/admin/events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/events",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"EventName\": \"fourth event\",\n  \"EventGoal\": \"string\",\n  \"EventOrganizer\": 0,\n  \"TotalDonations\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T20:46:20.808Z\",\n  \"UpdatedAt\": \"2021-05-28T20:46:20.808Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/events/id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/admin/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/events/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"EventName\": \"New Event\",\n  \"EventGoal\": \"To Update\",\n  \"EventOrganizer\": 0,\n  \"TotalDonations\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T20:59:44.655Z\",\n  \"UpdatedAt\": \"2021-05-28T20:59:44.655Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/events/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "request",
+					"item": [
+						{
+							"name": "/admin/requests/id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/admin/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/requests",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RequestReason\": \"Abro Meblat\",\n  \"UnitsNeeded\": 0,\n  \"BloodType\": 0,\n  \"TotalDonation\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T21:27:12.073Z\",\n  \"UpdatedAt\": \"2021-05-28T21:27:12.073Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/requests/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RequestReason\": \"Updated\",\n  \"UnitsNeeded\": 0,\n  \"TotalDonation\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T21:37:35.245Z\",\n  \"UpdatedAt\": \"2021-05-28T21:37:35.245Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/requests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/requests/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "donation-center",
+					"item": [
+						{
+							"name": "/admin/donation-centers/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/donation-centers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/donation-centers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"donation-centers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/donation-centers",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"DonationCenterName\": \"Manyew\",\n  \"Status\": \"Active\",\n  \"AppointmentDescription\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/donation-centers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"donation-centers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/donation-centers/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/donation-centers/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "auth-admin",
+					"item": [
+						{
+							"name": "/auth-admin/register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"FirstName\": \"Abenezer\",\n  \"LastName\": \"Atnafu\",\n  \"UserName\": \"Abenezer123\",\n  \"BirthDate\": \"23/08/1999\",\n  \"Gender\": \"Male\",\n  \"MaritalStatus\": \"Single\",\n  \"Email\":\"semeretalegn627@gmail.com\",\n  \"Password\":\"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth-admin/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-admin",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/auth-admin/login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Email\":\"admin@eshiblood.com\",\n    \"Password\":\"admin@eshiblood123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth-admin/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-admin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/auth-admin/login",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwicm9sZSI6IlN1cGVyQWRtaW4iLCJleHAiOjE2MjI3MDI4ODF9.be4Cyx8rbfiMTRIse9AzPBPLjUap1d1l2uOLAOlHmtM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/auth-admin/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-admin",
+										"login"
+									]
+								},
+								"description": "login authentication"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth-donor",
+					"item": [
+						{
+							"name": "/auth-donor/register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"FirstName\": \"Abenezer\",\n  \"LastName\": \"Atnafu\",\n  \"UserName\": \"Abenezer123\",\n  \"BirthDate\": \"23/08/1999\",\n  \"Gender\": \"Male\",\n  \"MaritalStatus\": \"Single\",\n  \"Email\":\"semeretalegn627@gmail.com\",\n  \"Password\":\"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth-donor/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-donor",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/auth-donor/login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Email\":\"admin@eshiblood.com\",\n    \"Password\":\"admin@eshiblood123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth-donor/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-donor",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/auth-donor/login",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwicm9sZSI6IlN1cGVyQWRtaW4iLCJleHAiOjE2MjI3MDI4ODF9.be4Cyx8rbfiMTRIse9AzPBPLjUap1d1l2uOLAOlHmtM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/auth-donor/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-donor",
+										"login"
+									]
+								},
+								"description": "login authentication"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth-nurse",
+					"item": [
+						{
+							"name": "/auth-nurse/register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"FirstName\": \"Abenezer\",\n  \"LastName\": \"Atnafu\",\n  \"UserName\": \"Abenezer123\",\n  \"BirthDate\": \"23/08/1999\",\n  \"Gender\": \"Male\",\n  \"MaritalStatus\": \"Single\",\n  \"Email\":\"semeretalegn627@gmail.com\",\n  \"Password\":\"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth-nurse/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-nurse",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/auth-nurse/login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Email\":\"admin@eshiblood.com\",\n    \"Password\":\"admin@eshiblood123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth-nurse/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-nurse",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/auth-nurse/login",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwicm9sZSI6IlN1cGVyQWRtaW4iLCJleHAiOjE2MjI3MDI4ODF9.be4Cyx8rbfiMTRIse9AzPBPLjUap1d1l2uOLAOlHmtM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/auth-nurse/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth-nurse",
+										"login"
+									]
+								},
+								"description": "login authentication"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "donor",
+			"item": [
+				{
+					"name": "appointment",
+					"item": [
+						{
+							"name": "/donor/appointments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"Status\": \"Active\",\n  \"AppointmentDescription\": \"New Appointment3\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/appointments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/appointments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/appointments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/appointments/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/appointments/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"StartDate\": \"2021-05-27T22:09:50.706Z\",\n  \"EndDate\": \"2021-05-27T22:09:50.706Z\",\n  \"StartTime\": \"2021-05-27T22:09:50.706Z\",\n  \"EndTime\": \"2021-05-27T22:09:50.706Z\",\n  \"Status\": \"Pending\",\n  \"AppointmentDescription\": \"Updated Description 2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/appointments/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "event",
+					"item": [
+						{
+							"name": "/donor/events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/events",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"EventName\": \"fourth event\",\n  \"EventGoal\": \"string\",\n  \"EventOrganizer\": 0,\n  \"TotalDonations\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T20:46:20.808Z\",\n  \"UpdatedAt\": \"2021-05-28T20:46:20.808Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/events/id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/donor/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/events/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"EventName\": \"New Event\",\n  \"EventGoal\": \"To Update\",\n  \"EventOrganizer\": 0,\n  \"TotalDonations\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T20:59:44.655Z\",\n  \"UpdatedAt\": \"2021-05-28T20:59:44.655Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/events/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "request",
+					"item": [
+						{
+							"name": "/donor/requests/id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/donor/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/requests",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RequestReason\": \"Abro Meblat\",\n  \"UnitsNeeded\": 0,\n  \"BloodType\": 0,\n  \"TotalDonation\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T21:27:12.073Z\",\n  \"UpdatedAt\": \"2021-05-28T21:27:12.073Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/requests/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RequestReason\": \"Updated\",\n  \"UnitsNeeded\": 0,\n  \"TotalDonation\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T21:37:35.245Z\",\n  \"UpdatedAt\": \"2021-05-28T21:37:35.245Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/requests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/requests/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "donation-center",
+					"item": [
+						{
+							"name": "/donor/donation-centers/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/donation-centers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/donation-centers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"donation-centers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/donation-centers",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"DonationCenterName\": \"Manyew\",\n  \"Status\": \"Active\",\n  \"AppointmentDescription\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/donor/donation-centers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"donation-centers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/donation-centers/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/donor/donation-centers/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/donor/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"donor",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "nurse",
+			"item": [
+				{
+					"name": "appointment",
+					"item": [
+						{
+							"name": "/nurse/appointments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"Status\": \"Active\",\n  \"AppointmentDescription\": \"New Appointment3\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/appointments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/appointments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/appointments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/appointments/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/appointments/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"StartDate\": \"2021-05-27T22:09:50.706Z\",\n  \"EndDate\": \"2021-05-27T22:09:50.706Z\",\n  \"StartTime\": \"2021-05-27T22:09:50.706Z\",\n  \"EndTime\": \"2021-05-27T22:09:50.706Z\",\n  \"Status\": \"Pending\",\n  \"AppointmentDescription\": \"Updated Description 2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/appointments/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/appointments/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"appointments",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "event",
+					"item": [
+						{
+							"name": "/nurse/events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/events",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"EventName\": \"fourth event\",\n  \"EventGoal\": \"string\",\n  \"EventOrganizer\": 0,\n  \"TotalDonations\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T20:46:20.808Z\",\n  \"UpdatedAt\": \"2021-05-28T20:46:20.808Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/events/id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/nurse/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/events/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"EventName\": \"New Event\",\n  \"EventGoal\": \"To Update\",\n  \"EventOrganizer\": 0,\n  \"TotalDonations\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T20:59:44.655Z\",\n  \"UpdatedAt\": \"2021-05-28T20:59:44.655Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/events/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/events/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"events",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "request",
+					"item": [
+						{
+							"name": "/nurse/requests/id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/nurse/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/requests",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RequestReason\": \"Abro Meblat\",\n  \"UnitsNeeded\": 0,\n  \"BloodType\": 0,\n  \"TotalDonation\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T21:27:12.073Z\",\n  \"UpdatedAt\": \"2021-05-28T21:27:12.073Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/requests/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"RequestReason\": \"Updated\",\n  \"UnitsNeeded\": 0,\n  \"TotalDonation\": 0,\n  \"Status\": \"Active\",\n  \"CreatedAt\": \"2021-05-28T21:37:35.245Z\",\n  \"UpdatedAt\": \"2021-05-28T21:37:35.245Z\",\n  \"UpdatedBy\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/requests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/requests",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/requests/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/requests/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"requests",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "donation-center",
+					"item": [
+						{
+							"name": "/nurse/donation-centers/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/donation-centers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/donation-centers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"donation-centers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/donation-centers",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"DonationCenterName\": \"Manyew\",\n  \"Status\": \"Active\",\n  \"AppointmentDescription\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/nurse/donation-centers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"donation-centers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/donation-centers/id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/nurse/donation-centers/id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/nurse/donation-centers/id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"nurse",
+										"donation-centers",
+										"id"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
