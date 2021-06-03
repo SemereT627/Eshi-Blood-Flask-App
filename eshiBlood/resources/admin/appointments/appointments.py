@@ -4,13 +4,15 @@ from eshiBlood import db
 from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import appointmentSchema, appointment
+from eshiBlood.utils.role_jwt import role_required,getTokenUserId
 
-appointment_ns = Namespace('appointments')
+appointment_ns = Namespace('admin/appointments')
 
 
 @appointment_ns.route('/<int:id>')
 class AppointmentResource(Resource):
     @appointment_ns.expect(appointment)
+
     def get(self, id):
         '''
         Show single appointment
@@ -50,6 +52,7 @@ class AppointmentResource(Resource):
 
 @appointment_ns.route('')
 class AppointmentsResource(Resource):
+    @role_required('SuperAdmin')
     def get(self):
         '''
         Show all appointments

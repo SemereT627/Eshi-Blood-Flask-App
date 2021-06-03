@@ -5,7 +5,7 @@ from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import requestSchema, request
 
-request_ns = Namespace('requests')
+request_ns = Namespace('admin/requests')
 
 @request_ns.route('/<int:id>')
 class RequestResource(Resource):

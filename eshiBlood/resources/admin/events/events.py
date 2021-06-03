@@ -5,7 +5,7 @@ from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import eventSchema, event
 
-event_ns = Namespace('events')
+event_ns = Namespace('admin/events')
 
 
 @event_ns.route('/<int:id>')

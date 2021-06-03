@@ -5,7 +5,7 @@ from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import donationCenter, donationCenterSchema
 
-donation_center_ns = Namespace('donation-centers')
+donation_center_ns = Namespace('admin/donation-centers')
 
 
 @donation_center_ns.route('/<int:id>')
