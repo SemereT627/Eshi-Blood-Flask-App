@@ -39,7 +39,7 @@ class EventSchema(ma.Schema):
 
     class Meta:
         fields = ("EventId","EventName", "EventGoal", "EventOrganizer",
-                  "TotalDonations", "Status", "CreatedAt", "UpdatedAt", "UpdatedBy")
+                  "TotalDonations", "Status", "CreatedAt", "UpdatedAt", "StartDate","EndDate","EventSlogan")
         model = Event
 
 
@@ -48,7 +48,7 @@ class RequestSchema(ma.Schema):
 
     class Meta:
         fields = ("RequestId","RequestReason", "UnitsNeeded", "BloodType",
-                  "TotalDonation", "Status", "CreatedAt", "UpdatedAt", "UpdatedBy")
+                  "TotalDonation", "Status", "CreatedAt", "UpdatedAt")
         model = Request
 
 
@@ -63,7 +63,7 @@ class DonationCenterSchema(ma.Schema):
     Status = EnumField(Status, by_value=True)
 
     class Meta:
-        fields = ("DonationCenterName", "Status", "UpdatedBy")
+        fields = ("DonationCenterName", "Status", "UpdatedBy", "CreatedAt", "UpdatedAt", "DonationCenterId")
         model = DonationCenter
 
 # Timeslot
@@ -92,7 +92,7 @@ user = api.model("User", {
     "UserName": fields.String,
     "BirthDate": fields.DateTime,
     "Gender": fields.String,
-    "MaritalStatus": fields.String,
+    "MaritalStatus": fields.String
 })
 
 
@@ -118,13 +118,15 @@ eventSchema = EventSchema(many=True)
 event = api.model("Event", {
     "EventId":fields.Integer,
     "EventName": fields.String,
-    "EventGoal": fields.String,
+    "EventGoal": fields.Integer,
+    "EventSlogan": fields.String,
     "EventOrganizer": fields.Integer,
     "TotalDonations": fields.Integer,
     "Status": fields.String(description="The object type", enum=["Active", "Pending", "Closed"]),
     "CreatedAt": fields.DateTime,
     "UpdatedAt": fields.DateTime,
-    "UpdatedBy": fields.Integer
+    "StartDate":fields.DateTime,
+    "EndDate":fields.DateTime
 })
 
 requestSchema = RequestSchema(many=True)
@@ -135,8 +137,7 @@ request = api.model("Request", {
     "TotalDonation": fields.Integer,
     "Status": fields.String(description="The object type", enum=["Active", "Pending", "Closed"]),
     "CreatedAt": fields.DateTime,
-    "UpdatedAt": fields.DateTime,
-    "UpdatedBy": fields.Integer
+    "UpdatedAt": fields.DateTime
 
 })
 
@@ -159,7 +160,7 @@ donationCenter = api.model("DonationCenter", {
     "AppointmentDescription": fields.String
 })
 
-bloodTypeSchema = BloodTypeSchema()
+bloodTypeSchema = BloodTypeSchema(many=True)
 bloodTypeSchema = api.model("Blood Type", {
     "BloodTypeName": fields.String,
     "BloodTypeDescription": fields.String,

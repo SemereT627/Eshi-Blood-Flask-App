@@ -4,11 +4,17 @@ from sqlalchemy.orm import backref, relationship
 from eshiBlood import db
 from eshiBlood.models.enums import *
 
-Request_BloodType_Association = db.Table("Request_BloodType_Association", db.Model.metadata,
-                                         db.Column("BloodType", db.Integer, db.ForeignKey(
-                                             "BloodType.BloodTypeId")),
-                                         db.Column("Request", db.Integer, db.ForeignKey("Request.RequestId")))
+# Serializer 
+from sqlalchemy.inspection import inspect
 
+class Serializer(object):
+
+    def serialize(self):
+        return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
+
+    @staticmethod
+    def serialize_list(l):
+        return [m.serialize() for m in l]
 # User
 
 
@@ -22,7 +28,7 @@ class User(db.Model):
     BirthDate = db.Column(DateTime)
     CreatedAt = db.Column(DateTime)
     UpdatedAt = db.Column(DateTime)
-    IsDeleted = db.Column(db.Integer)
+    IsDeleted = db.Column(db.Integer,default=0)
     MartialStatus = db.Column(Enum(MartialStatus))
     BloodType = db.Column(db.Integer, db.ForeignKey("BloodType.BloodTypeId"))
     Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
@@ -35,6 +41,13 @@ class User(db.Model):
     UserRole = db.Column(db.Integer, db.ForeignKey("UserRole.UserRoleId"))
     EmergencyContact = db.Column(db.Integer, db.ForeignKey(
         "EmergencyContact.EmergencyContactId"))
+    Request = relationship(
+        "Request", backref="requestbackref")
+    # @classmethod
+    # def serialize(self):
+    #     u = Serializer.serialize(self)
+    #     del u[""]
+    
 
 # UserCredential
 
@@ -67,18 +80,18 @@ class UserRole(db.Model):
     __tablename__ = "UserRole"
     UserRoleId = db.Column(db.Integer, primary_key=True)
     RoleName = db.Column(Enum(Role))
-    Users = relationship("User", backref="UserRoleUserBackref")
+    Users = relationship("User", backref="UserRoleUserBackref3")
 
 
 class Appointment(db.Model):
     __tablename__ = "Appointment"
 
-    AppointmentId = db.Column(db.Integer, primary_key=True)
+    AppointmentId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     # StartDate = db.Column(DateTime)
     # EndDate = db.Column(DateTime)
     # StartTime = db.Column(DateTime)
     # EndTime = db.Column(DateTime)
-    Status = db.Column(Enum(Status))
+    Status = db.Column(Enum(Status),default=Status.Pending)
     AppointmentDescription = db.Column(db.String)
     DonationCenter = db.Column(db.Integer, db.ForeignKey(
         'DonationCenter.DonationCenterId'))
@@ -87,39 +100,46 @@ class Appointment(db.Model):
     User = db.Column(db.Integer, db.ForeignKey('User.UserId'))
     CreatedAt = db.Column(DateTime)
     UpdatedAt = db.Column(DateTime)
-    IsDeleted = db.Column(db.Integer)
+    IsDeleted = db.Column(db.Integer,default=0)
 
 
 # Event
 class Event(db.Model):
     __tablename__ = "Event"
-    EventId = db.Column(db.Integer, primary_key=True)
+    EventId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     EventName = db.Column(db.String)
-    EventGoal = db.Column(db.String)
+    EventGoal = db.Column(db.Integer)
+    EventSlogan = db.Column(db.String)
+
     EventOrganizer = db.Column(db.Integer, db.ForeignKey("User.UserId"))
     TotalDonations = db.Column(db.Integer)
-    Status = db.Column(Enum(Status))
+    Status = db.Column(Enum(Status),default=Status.Pending)
     CreatedAt = db.Column(DateTime)
+
     UpdatedAt = db.Column(DateTime)
-    IsDeleted = db.Column(db.Integer)
+    IsDeleted = db.Column(db.Integer,default=0)
     # CreatedBy = db.Column(db.Integer, db.ForeignKey('User.UserId'))
     # UpdatedBy = db.Column(db.Integer, db.ForeignKey('User.UserId'))
+    Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
+    StartDate = db.Column(DateTime)
+    EndDate = db.Column(DateTime)
+
+    
 
 
 # Request
 class Request(db.Model):
     __tablename__ = "Request"
 
-    RequestId = db.Column(db.Integer, primary_key=True)
+    RequestId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     UnitsNeeded = db.Column(db.Integer)
     RequestReason = db.Column(db.String)
-    BloodTypes = relationship(
-        "BloodType", secondary=Request_BloodType_Association, back_populates="Requests")
+    BloodType = db.Column(db.Integer, db.ForeignKey('BloodType.BloodTypeId'))
     TotalDonation = db.Column(db.Integer)
-    Status = db.Column(Enum(Status))
+    Status = db.Column(Enum(Status),default=Status.Active)
     CreatedAt = db.Column(DateTime)
     UpdatedAt = db.Column(DateTime)
-    IsDeleted = db.Column(db.Integer)
+    IsDeleted = db.Column(db.Integer,default=0)
     CreatedBy = db.Column(db.Integer, db.ForeignKey('User.UserId'))
     Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
     # UpdatedBy = db.Column(db.Integer, db.ForeignKey('User.UserId'))
@@ -130,8 +150,8 @@ class Request(db.Model):
 
 class Address(db.Model):
     __tablename__ = "Address"
-    AddressId = db.Column(db.Integer, primary_key=True)
-    State = db.Column(db.String)
+    AddressId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    State = db.Column(Enum(State))
     City = db.Column(db.String)
     Woreda = db.Column(db.String)
     Kebele = db.Column(db.String)
@@ -141,6 +161,8 @@ class Address(db.Model):
     PhoneNumber = db.Column(db.String)
     User = relationship("User", backref="userAddressBackref", uselist=False)
     Request = relationship("Request", backref="RequestBackref", uselist=False)
+    DonationCenter = relationship("DonationCenter", backref="donationcenterbackref", uselist=False)
+    Event = relationship("Event", backref="eventaddressbackref", uselist=False)
 
 # DonationCenter
 
@@ -148,15 +170,14 @@ class Address(db.Model):
 class DonationCenter(db.Model):
     __tablename__ = "DonationCenter"
 
-    DonationCenterId = db.Column(db.Integer, primary_key=True)
+    DonationCenterId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Address = db.Column(db.Integer, db.ForeignKey("Address.AddressId"))
     DonationCenterName = db.Column(db.String)
-    Status = db.Column(Enum(Status))
-    UpdatedBy = db.Column(
-        db.Integer, db.ForeignKey("User.UserId"), unique=True)
+    Status = db.Column(Enum(Status),default="Pending")
+    UpdatedBy = db.Column(db.Integer, db.ForeignKey("User.UserId"))
     CreatedAt = db.Column(DateTime)
     UpdatedAt = db.Column(DateTime)
-    IsDeleted = db.Column(db.Integer)
+    IsDeleted = db.Column(db.Integer,default=0)
     Appointments = relationship("Appointment", backref="DonationCenterBackRef")
     TimeSlots = relationship("TimeSlot", backref="TimeSlotBackref")
 
@@ -164,7 +185,7 @@ class DonationCenter(db.Model):
 # Timeslot
 class TimeSlot(db.Model):
     __tablename__ = "TimeSlot"
-    TimeSlotId = db.Column(db.Integer, primary_key=True)
+    TimeSlotId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Weekday = db.Column(Enum(WeekDay))
     StartTime = db.Column(DateTime)
     EndTime = db.Column(DateTime)
@@ -175,14 +196,13 @@ class TimeSlot(db.Model):
 # bloodtypes
 class BloodType(db.Model):
     __tablename__ = "BloodType"
-    BloodTypeId = db.Column(db.Integer, primary_key=True)
-    BloodTypeName = db.Column(db.String)
+    BloodTypeId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    BloodTypeName = db.Column(db.String,nullable=False)
     BloodTypeDescription = db.Column(db.String)
     BloodTypeCreatedAt = db.Column(db.String)
     BloodTypeUpdatedAt = db.Column(db.String)
     Users = relationship("User", backref="userBloodTypeBackref")
-    Requests = relationship(
-        "Request", secondary=Request_BloodType_Association, back_populates="BloodTypes")
+    Requests = relationship("Request",backref="RequestBloodtypeBackref")
     EmergencyContacts = relationship(
         "EmergencyContact", backref="EmergencyContactBloodTypeBackref")
 
@@ -191,7 +211,7 @@ class BloodType(db.Model):
 
 class EmergencyContact(db.Model):
     __tablename__ = "EmergencyContact"
-    EmergencyContactId = db.Column(db.Integer, primary_key=True)
+    EmergencyContactId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     ContactName = db.Column(db.String)
     ContactPhone = db.Column(db.String)
     User = relationship(
@@ -202,9 +222,9 @@ class EmergencyContact(db.Model):
 
 class DonationHistory(db.Model):
     __tablename__ = "DonationHistory"
-    DonationCenterId = db.Column(db.Integer, primary_key=True)
+    DonationCenterId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     CreatedAt = db.Column(DateTime)
-    IsDeleted = db.Column(db.Integer)
+    IsDeleted = db.Column(db.Integer,default=0)
     AppointmentId = db.Column(
         db.Integer, db.ForeignKey("Appointment.AppointmentId"))
     UserId = db.Column(db.Integer, db.ForeignKey("User.UserId"))

@@ -7,7 +7,7 @@ import flask
 from eshiBlood.schema.ma import userCredential, user, userSchema
 from datetime import datetime
 from sqlalchemy import exc
-from eshiBlood.utils.role_jwt import role_required, getTokenUserId, setToken
+from eshiBlood.utils.role_jwt import *
 
 
 
@@ -20,7 +20,7 @@ class UserLoginResource(Resource):
     @donor_auth_ns.expect(userCredential)
     def post(self):
         data = api.payload
-        print("**************** auth-donor-login")
+        # print("**************** auth-donor-login")
         
         if data['Email'] != "" and data['Password'] != "":
             # Finding a user from user credential table
@@ -34,19 +34,19 @@ class UserLoginResource(Resource):
             else:
                 return {"message": "user not found"}
             role = UserRole.query.filter_by(UserRoleId=user.UserRole).first()
+            
             if userCredential and data['Password'] == userCredential.Password:
-                roleStr = str(role.RoleName).split('.')[-1]
-                # tok = str(setToken(user.UserId,roleStr),'utf-8')
-                # print(setToken(user.UserId,roleStr))
-                # return {"x":"y"}
-                response = flask.make_response()
-                response.status_code = 200
-                tokenValue = setToken(user.UserId,roleStr)
-                # response.set_cookie("token",value = tokenValue,expires=10000000000,httponly=True)
-                print(tokenValue)
-                print(f"{userCredential.Password} {data['Password'] == userCredential.Password}")
-                response.set_cookie(key="token",value = tokenValue,expires=10000000000,httponly=True)
-                return response
+                if not userIsDeleted(user.UserId):
+                    roleStr = str(role.RoleName).split('.')[-1]
+                    
+                    response = flask.make_response()
+                    response.status_code = 200
+                    tokenValue = setToken(user.UserId,roleStr)
+                    
+                    response.set_cookie(key="token",value = tokenValue,expires=10000000000,httponly=True)
+                    return response
+                else:
+                    return "unauthorized", 400
             else:
                 return {"message": "Email or password incorrect"}, 400
 

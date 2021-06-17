@@ -1,10 +1,11 @@
+import flask
 from flask_restplus import Resource, Namespace
 from eshiBlood.models.models import Appointment
 from eshiBlood import db
 from eshiBlood.routes.routes import api
 from datetime import datetime
 from eshiBlood.schema.ma import appointmentSchema, appointment
-from eshiBlood.utils.role_jwt import role_required,getTokenUserId
+from eshiBlood.utils.role_jwt import *
 
 appointment_admin_ns = Namespace('admin/appointments')
 
@@ -69,6 +70,9 @@ class AppointmentsResource(Resource):
         Creates an appointment
         '''
         payload = api.payload
+        token = flask.request.cookies.get("token")
+        uid = getTokenUserId(token)
+        queriedUser = User.query.filter_by(UserId = uid).first()
         newAppointment = Appointment(
             # StartDate=payload["StartDate"],
             # EndDate=payload["EndDate"],
@@ -80,6 +84,7 @@ class AppointmentsResource(Resource):
             UpdatedAt=datetime.utcnow(),
             IsDeleted=0
         )
+        queriedUser.Appointments.append(newAppointment)
         db.session.add(newAppointment)
         db.session.commit()
         return {"message": "appointment created"}, 200

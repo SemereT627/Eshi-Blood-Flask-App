@@ -21,17 +21,17 @@ def role_required(roleArg):
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            token = request.cookies.get("token")
-            print(f"cookies {token}")
+            token = request.headers.get("token")
+            print(f"headers {token}")
 
             if not token:
 
                 return jsonify({'message': 'Token is missing!'})
             try:
                 data = jwt.decode(token, app.config['SECRET_KEY'])
-                print(data["role"])
-                if data["role"] == roleArg:
-                    print(data["role"])
+                # print(data["role"]+"#################")
+                if data["role"] == roleArg and not userIsDeleted(getTokenUserId(token)):
+                    print(data["role"]+"****************")
                 else:
                     return jsonify(msg="Unauthorized personnel")
             except:
@@ -43,16 +43,38 @@ def role_required(roleArg):
     return wrapper
 
 
-def getTokenUserId(req):
-    token = request.cookies.get("token")
-    print(f"cookies {token}")
+def getTokenUserId(token):
+    token = request.headers.get("token")
+    print(f"headers {token}")
     data = jwt.decode(token, app.config['SECRET_KEY'])
     return data["id"]
+
+def userIsDeleted(id):
+    print("user is deleted function accessed")
+    try:
+        
+        queriedUser = User.query.filter_by(UserId=id).first()
+        if str(queriedUser.IsDeleted) == "1":
+            print(f"true deleted{queriedUser.IsDeleted}")
+            return True
+        else:
+            return False
+    except:
+        return True
+def tokenRole():
+    token = request.headers.get("token")
+    try:
+        data = jwt.decode(token, app.config['SECRET_KEY'])
+    except:
+        pass
+    data = jwt.decode(token, app.config['SECRET_KEY'])
+    return data["role"]
+    
 
 
 def setToken(id, role):
     token = str(jwt.encode({'id': id, "role": role, 'exp': datetime.datetime.utcnow(
-    ) + datetime.timedelta(seconds=1005)}, app.config['SECRET_KEY']), "utf-8")
+    ) + datetime.timedelta(seconds=10000000005)}, app.config['SECRET_KEY']), "utf-8")
     return token
 
 
@@ -64,8 +86,8 @@ def either_roles_required(*roleArgs):
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            token = request.cookies.get("token")
-            print(f"cookies {token}")
+            token = request.headers.get("token")
+            print(f"headers {token}")
 
             if not token:
 
@@ -73,7 +95,7 @@ def either_roles_required(*roleArgs):
             try:
                 data = jwt.decode(token, app.config['SECRET_KEY'])
                 print(data["role"])
-                if data["role"] in roleArgs:
+                if data["role"] in roleArgs  and not userIsDeleted(getTokenUserId(token)):
                     print(data["role"])
                 else:
                     return jsonify(msg="Unauthorized personnel")
@@ -92,8 +114,8 @@ def invitation_required(invitedAs):
         def decorator(*args, **kwargs):
             # token = request.args.get("token")
             # token = request.headers.get("token")
-            invitation_token = request.cookies.get("invitation-token")
-            print(f"cookies {invitation_token}")
+            invitation_token = request.args.get("invitation_token")
+            print(f"headers {invitation_token}")
 
             if (invitation_token != None or invitation_token != ""):
 
@@ -115,10 +137,10 @@ def invitation_required(invitedAs):
 
     return wrapper
 
-
+# decrease exp time to 15 minutes
 def setInviteToken(invitedAs):
     token = str(jwt.encode({"invitation-token": invitedAs, 'exp': datetime.datetime.utcnow(
-    ) + datetime.timedelta(seconds=(15*60))}, app.config['SECRET_KEY']), "utf-8")
+    ) + datetime.timedelta(seconds=(1000000))}, app.config['SECRET_KEY']), "utf-8")
     return token
 
 

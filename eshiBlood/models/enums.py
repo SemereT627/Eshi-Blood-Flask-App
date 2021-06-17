@@ -31,3 +31,28 @@ class Role(enum.Enum):
     Admin = "Admin"
     Donor = "Donor"
     Nurse = "Nurse"
+
+
+class BloodName(enum.Enum):
+    Apositive = "A+"
+    Anegative = "A-"
+    Bpositive = "B+"
+    Bnegative = "B-"
+    ABpositive = "AB+"
+    ABnegative = "AB-"
+    Opositive = "O+"
+    Onegative = "O-"
+
+
+class State(enum.Enum):
+    AA="Addis Ababa"
+    AM="Amhara"
+    AF="Afar"
+    BS="Benishangul"
+    OR="Oromia"
+    SN="South Nations"
+    SS="Sidama State"
+    GM="Gambela"
+    SM="Somali"
+    HR="Harari"
+    DD="Dire Dawa"
